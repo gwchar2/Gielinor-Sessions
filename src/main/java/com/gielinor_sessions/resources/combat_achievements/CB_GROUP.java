@@ -1,34 +1,37 @@
 package com.gielinor_sessions.resources.combat_achievements;
 
+import com.gielinor_sessions.resources.requirements.IRequirement;
+
 import lombok.Getter;
-import net.runelite.api.Client;
+import lombok.RequiredArgsConstructor;
 import net.runelite.api.gameval.VarbitID;
 
+@RequiredArgsConstructor
 @Getter
-public enum CA_GROUP
+public enum CB_GROUP
 {
 	GROUP_EASY(
-	    "Easy Combat Achievements",
+	    "Easy Combat Achievement",
 	    1,
 	    VarbitID.CA_TIER_STATUS_EASY),
 	GROUP_MEDIUM(
-	    "Medium Combat Achievements",
+	    "Medium Combat Achievement",
 	    2,
 	    VarbitID.CA_TIER_STATUS_MEDIUM),
 	GROUP_HARD(
-	    "Hard Combat Achievements",
+	    "Hard Combat Achievement",
 	    3,
 	    VarbitID.CA_TIER_STATUS_HARD),
 	GROUP_ELITE(
-	    "Elite Combat Achievements",
+	    "Elite Combat Achievement",
 	    4,
 	    VarbitID.CA_TIER_STATUS_ELITE),
 	GROUP_MASTER(
-	    "Master Combat Achievements",
+	    "Master Combat Achievement",
 	    5,
 	    VarbitID.CA_TIER_STATUS_MASTER),
 	GROUP_GRANDMASTER(
-	    "Grandmaster Combat Achievements",
+	    "Grandmaster Combat Achievement",
 	    6,
 	    VarbitID.CA_TIER_STATUS_GRANDMASTER);
 
@@ -36,15 +39,9 @@ public enum CA_GROUP
 	private final int pointsPerTask;
 	private final int statusVarbitId;
 
-	CA_GROUP(String _name, int _pointsPerTask, int _statusVarbitId)
-	{
-		this.name = _name;
-		this.pointsPerTask = _pointsPerTask;
-		this.statusVarbitId = _statusVarbitId;
-	}
-
 	public boolean isCompleted(Client client)
 	{
-		return client.getVarbitValue(statusVarbitId) == 2;
+		return client.getVarbitValue(statusVarbitId) == IRequirement.COMPLETED;
 	}
+
 }

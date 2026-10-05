@@ -7,13 +7,9 @@ import net.runelite.client.config.ConfigItem;
 @ConfigGroup("gielinor_sessions")
 public interface GielinorSessionsConfig extends Config
 {
-	@ConfigItem(
-		keyName = "greeting",
-		name = "Welcome Greeting",
-		description = "The message to show to the user when they login"
-	)
+	@ConfigItem(keyName = "greeting", name = "Welcome Greeting", description = "The message to show to the user when they login")
 	default String greeting()
 	{
-		return "Hello you are gay af";
+		return "Hello, Gielinor games awates you!";
 	}
 }
