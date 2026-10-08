@@ -3,11 +3,10 @@ package com.gielinor_sessions.resources.combat_achievements;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.runelite.api.gameval.VarbitID;
-import net.runelite.api.Client;
 
 @RequiredArgsConstructor
 @Getter
-public enum CB_GROUP implements CB_REQUIREMENT
+public enum CB_GROUP
 {
 	GROUP_EASY(
 	    "Easy Combat Achievement",
@@ -36,12 +35,6 @@ public enum CB_GROUP implements CB_REQUIREMENT
 
 	private final String name;
 	private final int pointsPerTask;
-	private final int completionVarbitId;
-
-	@Override
-	public boolean isSatisfied(Client client)
-	{
-		return client.getVarbitValue(completionVarbitId) != 0;
-	}
+	private final int completionVarbit;
 
 }

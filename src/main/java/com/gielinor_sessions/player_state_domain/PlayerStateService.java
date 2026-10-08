@@ -1,77 +1,101 @@
 package com.gielinor_sessions.player_state_domain;
 
-import com.gielinor_sessions.resources.combat_achievements.CB_TASK;
+import javax.inject.Inject;
+
+import com.gielinor_sessions.resources.DiaryService;
+
 import lombok.Getter;
 import net.runelite.api.Client;
-import net.runelite.api.Skill;
 import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
+import net.runelite.api.Skill;
 import net.runelite.api.gameval.VarPlayerID;
 
 @Getter
 public class PlayerStateService
 {
 	private PlayerState playerState = new PlayerState();
-	private Client client;
 
-	public void Init(Client _client)
+	private final Client client;
+	private final DiaryService diaryService;
+
+	@Inject
+	public PlayerStateService(
+	    Client client,
+	    DiaryService diaryService)
 	{
-		client = _client;
-		snapshotLevels(playerState);
-		snapshotQuests(playerState);
-		snapshotCombatAcheivements(playerState);
-		// completedAchievementsIds = ;
-		// incompletedAchievementsIds = ;
-		// bossKillCounts = ;
+		this.client = client;
+		this.diaryService = diaryService;
 	}
 
-	/*
+	public void init()
+	{
+		snapshotLevels();
+		snapshotQuests();
+
+		diaryService.populateIncompleteAchievementDiaries(playerState);
+		diaryService.populateIncompleteCombatAchievements(playerState);
+
+		// snapshotBossKillCounts();
+	}
+
+	/**
 	 * Stores a snapshot of current levels.
 	 */
-	private void snapshotLevels(PlayerState playerState)
+	private void snapshotLevels()
 	{
+		playerState.getLevels().clear();
+		playerState.getExperience().clear();
+
 		for (Skill skill : Skill.values())
 		{
-			playerState.getLevels().put(skill, client.getRealSkillLevel(skill));
-			playerState.getExperience().put(skill, client.getSkillExperience(skill));
+			playerState.getLevels().put(
+			    skill,
+			    client.getRealSkillLevel(skill));
+
+			playerState.getExperience().put(
+			    skill,
+			    client.getSkillExperience(skill));
 		}
 
-		playerState.setCombatLevel(client.getLocalPlayer().getCombatLevel());
+		playerState.setCombatLevel(
+		    client.getLocalPlayer().getCombatLevel());
 	}
 
-	/*
-	 * Stores a snapshot of currently finished/in progress/not started quests.
+	/**
+	 * Stores a snapshot of currently finished,
+	 * in-progress and not-started quests.
 	 */
-	void snapshotQuests(PlayerState playerState)
+	private void snapshotQuests()
 	{
-		for (Quest qst : Quest.values())
+		playerState.getCompletedQuestSet().clear();
+		playerState.getNotStartedQuestSet().clear();
+		playerState.getInProgressQuestSet().clear();
+
+		for (Quest quest : Quest.values())
 		{
-			QuestState state = qst.getState(client);
+			QuestState state = quest.getState(client);
+
 			switch (state)
 			{
 				case FINISHED:
-					playerState.getCompletedQuestSet().add(qst);
+					playerState.getCompletedQuestSet().add(quest);
 					break;
+
 				case NOT_STARTED:
-					playerState.getCompletedQuestSet().add(qst);
+					playerState.getNotStartedQuestSet().add(quest);
 					break;
+
 				case IN_PROGRESS:
-					playerState.getCompletedQuestSet().add(qst);
+					playerState.getInProgressQuestSet().add(quest);
 					break;
+
 				default:
 					break;
 			}
 		}
 
-		playerState.setQuestPoints(client.getVarpValue(VarPlayerID.QP));
-
-	}
-
-	/*
-	 * Stores a snapshot of combat achievements
-	 */
-	void snapshotCombatAcheivements(PlayerState playerState)
-	{
-
+		playerState.setQuestPoints(
+		    client.getVarpValue(VarPlayerID.QP));
 	}
 }

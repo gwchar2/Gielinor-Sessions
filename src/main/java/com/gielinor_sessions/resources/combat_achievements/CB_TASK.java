@@ -2,12 +2,11 @@ package com.gielinor_sessions.resources.combat_achievements;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.runelite.api.Client;
 import net.runelite.api.gameval.VarbitID;
 
 @Getter
 @RequiredArgsConstructor
-public enum CB_TASK implements CB_REQUIREMENT
+public enum CB_TASK
 {
 	CA_TASK_ABBERANT_SPECTRE_KILLCOUNT_1(
 	    "Aberrant Spectre",
@@ -20,11 +19,5 @@ public enum CB_TASK implements CB_REQUIREMENT
 	private final String description;
 	private final CB_GROUP group;
 	private final CB_TASK_TYPE type;
-	private final int completionVarbitId;
-
-	@Override
-	public boolean isSatisfied(Client client)
-	{
-		return client.getVarbitValue(completionVarbitId) != 0;
-	}
+	private final int completionVarbit;
 }

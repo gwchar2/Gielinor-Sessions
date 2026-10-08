@@ -23,8 +23,8 @@ public class GielinorSessionsPlugin extends Plugin
 
 	@Inject
 	private GielinorSessionsConfig config;
-
-	private PlayerStateService playerService = new PlayerStateService();
+	@Inject
+	private PlayerStateService playerService;
 
 	private boolean initializePlayerState;
 
@@ -58,7 +58,7 @@ public class GielinorSessionsPlugin extends Plugin
 			return;
 		}
 
-		playerService.Init(client);
+		playerService.init();
 		initializePlayerState = false;
 	}
 
