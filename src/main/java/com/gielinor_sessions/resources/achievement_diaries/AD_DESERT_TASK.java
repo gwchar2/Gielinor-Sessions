@@ -15,15 +15,18 @@ public enum AD_DESERT_TASK implements AD_TASK
 	;
 
 	private final String name;
+	private final int completionVarbit;
 	private final AD_GROUP group;
 	private final List<AD_REQUIREMENT> requirements;
 
 	AD_DESERT_TASK(
 	    String name,
+	    int _completionVarbit,
 	    AD_GROUP group,
 	    AD_REQUIREMENT... requirements)
 	{
 		this.name = name;
+		this.completionVarbit = _completionVarbit;
 		this.group = group;
 
 		List<AD_REQUIREMENT> copy = new ArrayList<>();

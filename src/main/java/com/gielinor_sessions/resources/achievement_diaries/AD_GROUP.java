@@ -1,9 +1,11 @@
 package com.gielinor_sessions.resources.achievement_diaries;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.runelite.api.gameval.VarbitID;
 
 @Getter
+@AllArgsConstructor
 public enum AD_GROUP
 {
 	ARDOUGNE_EASY(
@@ -250,13 +252,4 @@ public enum AD_GROUP
 	private final AD_TIER tier;
 	private final int completionVarbit;
 
-	AD_GROUP(
-	    AD_REGION region,
-	    AD_TIER tier,
-	    int completionVarbit)
-	{
-		this.region = region;
-		this.tier = tier;
-		this.completionVarbit = completionVarbit;
-	}
 }
