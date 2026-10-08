@@ -29,13 +29,6 @@ public enum CB_TASK_TYPE implements IRequirement
 	}
 
 	@Override
-	public boolean isCompleted(Client client)
-	{
-		// Stub
-		return false;
-	}
-
-	@Override
 	public String toString(Client client)
 	{
 		return "Type" + type;

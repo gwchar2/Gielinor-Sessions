@@ -35,25 +35,6 @@ public class OrRequirement implements IRequirement
 	}
 
 	@Override
-	public boolean isCompleted(Client client)
-	{
-		// Can be any requirement.
-		for (IRequirement requirement : requirements)
-		{
-			if (requirement.isCompleted(client))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	@Override
 	public String toString(Client client)
 	{
 		StringBuilder output = new StringBuilder();

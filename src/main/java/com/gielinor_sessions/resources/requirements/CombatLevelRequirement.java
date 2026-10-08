@@ -17,12 +17,6 @@ public class CombatLevelRequirement implements IRequirement
 	}
 
 	@Override
-	public boolean isCompleted(Client client)
-	{
-		return client.getLocalPlayer().getCombatLevel() >= level;
-	}
-
-	@Override
 	public String toString(Client client)
 	{
 		return "Combat level required: " + level;

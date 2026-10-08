@@ -37,16 +37,8 @@ public enum CB_ACHIEVEMENT implements IRequirement
 	}
 
 	@Override
-	public boolean isCompleted(Client client)
-	{
-		// TODO: (4) Might not be != 0!
-		return client.getVarbitValue(completionVarbitId) != 0;
-	}
-
-	@Override
 	public boolean satisfiesRequirement(Client client)
 	{
-		// TODO: (4) Might not be != 0!
 		return client.getVarbitValue(completionVarbitId) != 0;
 	}
 

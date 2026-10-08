@@ -28,17 +28,6 @@ public class QuestRequirement implements IRequirement
 	}
 
 	@Override
-	public boolean isCompleted(Client client)
-	{
-		QuestState state = quest.getState(client);
-		if (requiredState == QuestState.IN_PROGRESS)
-		{
-			return state == QuestState.IN_PROGRESS || state == QuestState.FINISHED;
-		}
-		return state == QuestState.FINISHED;
-	}
-
-	@Override
 	public String toString(Client client)
 	{
 		if (requiredState == QuestState.IN_PROGRESS)

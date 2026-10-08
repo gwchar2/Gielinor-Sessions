@@ -18,12 +18,6 @@ public class QuestPointRequirement implements IRequirement
 	}
 
 	@Override
-	public boolean isCompleted(Client client)
-	{
-		return client.getVarpValue(VarPlayerID.QP) >= qp;
-	}
-
-	@Override
 	public String toString(Client client)
 	{
 		return qp + " Quest Points";

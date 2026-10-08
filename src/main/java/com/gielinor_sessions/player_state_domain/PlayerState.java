@@ -6,8 +6,9 @@ import lombok.Setter;
 import net.runelite.api.Skill;
 import net.runelite.api.Quest;
 import net.runelite.api.Client;
+
+import com.gielinor_sessions.resources.achievement_diary.GEN_TASK;
 import com.gielinor_sessions.resources.combat_achievements.*;
-import com.gielinor_sessions.resources.requirements.GenericAchievementDiary;
 
 @Getter
 @Setter
@@ -30,7 +31,7 @@ public class PlayerState
 	private Set<Quest> inProgressQuestSet = new HashSet<Quest>();
 
 	Set<CB_ACHIEVEMENT> incompleteCombatAchievements = new HashSet<CB_ACHIEVEMENT>();
-	Set<GenericAchievementDiary> incompleteAchievementDiaries = new HashSet<GenericAchievementDiary>();
+	Set<GEN_TASK> incompleteAchievementDiaries = new HashSet<GEN_TASK>();
 
 	private Map<String, Integer> bossKillCounts;
 

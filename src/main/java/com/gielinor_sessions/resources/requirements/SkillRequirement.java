@@ -19,12 +19,6 @@ public class SkillRequirement implements IRequirement
 	}
 
 	@Override
-	public boolean isCompleted(Client client)
-	{
-		return client.getRealSkillLevel(skill) >= level;
-	}
-
-	@Override
 	public String toString(Client client)
 	{
 		return level + " " + skill.getName();

@@ -74,13 +74,13 @@ public class PlayerStateService
 	{
 		for (CB_ACHIEVEMENT ca : CB_ACHIEVEMENT.values())
 		{
-			if (ca.isCompleted(client))
+			if (ca.satisfiesRequirement(client))
 			{
 				continue;
 			}
 
 			// TODO: (3) Fix this.
-			if (ca.getGroup().isCompleted(client))
+			if (ca.getGroup().satisfiesRequirement(client))
 			{
 				continue;
 			}

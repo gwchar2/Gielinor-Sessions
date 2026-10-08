@@ -5,6 +5,7 @@ import com.gielinor_sessions.resources.requirements.IRequirement;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.runelite.api.gameval.VarbitID;
+import net.runelite.api.Client;
 
 @RequiredArgsConstructor
 @Getter
@@ -39,7 +40,7 @@ public enum CB_GROUP
 	private final int pointsPerTask;
 	private final int statusVarbitId;
 
-	public boolean isCompleted(Client client)
+	public boolean satisfiesRequirement(Client client)
 	{
 		return client.getVarbitValue(statusVarbitId) == IRequirement.COMPLETED;
 	}

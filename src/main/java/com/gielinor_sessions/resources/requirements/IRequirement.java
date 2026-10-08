@@ -8,7 +8,5 @@ public interface IRequirement
 
 	boolean satisfiesRequirement(Client client);
 
-	boolean isCompleted(Client client);
-
 	String toString(Client client);
 }

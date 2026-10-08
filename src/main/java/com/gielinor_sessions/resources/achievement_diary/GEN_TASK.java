@@ -1,22 +1,23 @@
-package com.gielinor_sessions.resources.requirements;
+package com.gielinor_sessions.resources.achievement_diary;
 
 import java.util.HashSet;
 import java.util.Set;
 import lombok.Getter;
 import net.runelite.api.Client;
-import com.gielinor_sessions.resources.achievement_diary.AD_GROUP;
+
+import com.gielinor_sessions.resources.requirements.IRequirement;
 
 @Getter
-public abstract class GenericAchievementDiary
+public abstract class GEN_TASK
 {
 	@Getter
-	private final Set<DiaryRequirement> requirements = new HashSet<>();
+	private final Set<AD_TASK> tasks = new HashSet<>();
 	private AD_GROUP group;
 
 	protected void add(String _task, int _varbitID, IRequirement... _requirements)
 	{
-		DiaryRequirement diaryRequirement = new DiaryRequirement(_task, _varbitID, _requirements);
-		this.requirements.add(diaryRequirement);
+		AD_TASK task = new AD_TASK(_task, _varbitID, _requirements);
+		this.tasks.add(task);
 	}
 
 	protected void setGroup(AD_GROUP _group)
