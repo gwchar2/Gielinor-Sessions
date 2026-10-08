@@ -1,10 +1,9 @@
 package com.gielinor_sessions.resources.combat_achievements;
 
-import com.gielinor_sessions.resources.requirements.IRequirement;
+import lombok.Getter;
 
-import net.runelite.api.Client;
-
-public enum CB_TASK_TYPE implements IRequirement
+@Getter
+public enum CB_TASK_TYPE
 {
 	KILL_COUNT("Kill Count"),
 	MECHANICAL("Mechanical"),
@@ -21,16 +20,4 @@ public enum CB_TASK_TYPE implements IRequirement
 		this.type = _type;
 	}
 
-	@Override
-	public boolean satisfiesRequirement(Client client)
-	{
-		// Stub
-		return false;
-	}
-
-	@Override
-	public String toString(Client client)
-	{
-		return "Type" + type;
-	}
 }

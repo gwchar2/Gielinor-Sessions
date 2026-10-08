@@ -3,13 +3,14 @@ package com.gielinor_sessions.player_state_domain;
 import java.util.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.RequiredArgsConstructor;
 import net.runelite.api.Skill;
 import net.runelite.api.Quest;
 import net.runelite.api.Client;
 
-import com.gielinor_sessions.resources.achievement_diary.GEN_TASK;
 import com.gielinor_sessions.resources.combat_achievements.*;
 
+@RequiredArgsConstructor
 @Getter
 @Setter
 public class PlayerState
@@ -30,8 +31,8 @@ public class PlayerState
 	private Set<Quest> notStartedQuestSet = new HashSet<Quest>();
 	private Set<Quest> inProgressQuestSet = new HashSet<Quest>();
 
-	Set<CB_ACHIEVEMENT> incompleteCombatAchievements = new HashSet<CB_ACHIEVEMENT>();
-	Set<GEN_TASK> incompleteAchievementDiaries = new HashSet<GEN_TASK>();
+	Set<CB_TASK> incompleteCombatAchievements = new HashSet<CB_TASK>();
+	// Set<GEN_TASK> incompleteAchievementDiaries = new HashSet<GEN_TASK>();
 
 	private Map<String, Integer> bossKillCounts;
 

@@ -1,0 +1,17 @@
+package com.gielinor_sessions.resources.achievement_diary;
+
+public enum AD_REGION
+{
+	ARDOUGNE,
+	DESERT,
+	FALADOR,
+	FREMENNIK,
+	KANDARIN,
+	KARAMJA,
+	KOUREND_KEBOS,
+	LUMBRIDGE_DRAYNOR,
+	MORYTANIA,
+	VARROCK,
+	WESTERN_PROVINCES,
+	WILDERNESS
+}

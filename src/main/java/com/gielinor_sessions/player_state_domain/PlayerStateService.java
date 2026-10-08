@@ -1,6 +1,6 @@
 package com.gielinor_sessions.player_state_domain;
 
-import com.gielinor_sessions.resources.combat_achievements.CB_ACHIEVEMENT;
+import com.gielinor_sessions.resources.combat_achievements.CB_TASK;
 import lombok.Getter;
 import net.runelite.api.Client;
 import net.runelite.api.Skill;
@@ -72,20 +72,6 @@ public class PlayerStateService
 	 */
 	void snapshotCombatAcheivements(PlayerState playerState)
 	{
-		for (CB_ACHIEVEMENT ca : CB_ACHIEVEMENT.values())
-		{
-			if (ca.satisfiesRequirement(client))
-			{
-				continue;
-			}
 
-			// TODO: (3) Fix this.
-			if (ca.getGroup().satisfiesRequirement(client))
-			{
-				continue;
-			}
-
-			playerState.getIncompleteCombatAchievements().add(ca);
-		}
 	}
 }
