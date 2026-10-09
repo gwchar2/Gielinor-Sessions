@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -12,6 +13,9 @@ import com.gielinor_sessions.resources.achievement_diaries.requirements.*;
 public enum AD_KARAMJA_TASK implements AD_TASK
 {
     // EASY
+	PICK_BANANAS(
+	    "Pick 5 bananas from the plantation located east of the volcano.",
+	    AD_GROUP.KARAMJA_EASY),
 	USE_MOSS_GIANT_ROPE_SWING(
 	    "Use the rope swing to travel to the small island north-west of Karamja, where the moss giants are.",
 	    AD_GROUP.KARAMJA_EASY,
@@ -20,10 +24,28 @@ public enum AD_KARAMJA_TASK implements AD_TASK
 	    "Mine some gold from the rocks on the north-west peninsula of Karamja.",
 	    AD_GROUP.KARAMJA_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.MINING, 40)),
+	TRAVEL_PORT_SARIM(
+	    "Travel to Port Sarim via the dock, east of Musa Point.",
+	    AD_GROUP.KARAMJA_EASY),
+	TRAVEL_ARDOUGNE(
+	    "Travel to Ardougne via the port near Brimhaven.",
+	    AD_GROUP.KARAMJA_EASY),
 	EXPLORE_CAIRN_ISLAND(
 	    "Explore Cairn Island to the west of Karamja.",
 	    AD_GROUP.KARAMJA_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.AGILITY, 15)),
+	USE_BANANA_PLANTATION_FISHING_SPOTS(
+	    "Use the fishing spots north of the banana plantation.",
+	    AD_GROUP.KARAMJA_EASY),
+	COLLECT_SEAWEED(
+	    "Collect 5 seaweed from anywhere on Karamja.",
+	    AD_GROUP.KARAMJA_EASY),
+	ATTEMPT_TZHAAR_FIGHT_PITS_OR_CAVE(
+	    "Attempt the TzHaar Fight Pits or Fight Cave.",
+	    AD_GROUP.KARAMJA_EASY),
+	KILL_JOGRE(
+	    "Kill a Jogre in the Pothole Dungeon.",
+	    AD_GROUP.KARAMJA_EASY),
 
     // MEDIUM
 	CLAIM_AGILITY_ARENA_TICKET(
@@ -111,6 +133,15 @@ public enum AD_KARAMJA_TASK implements AD_TASK
 	        new AD_QUEST_REQUIREMENT(Quest.JUNGLE_POTION, QuestState.FINISHED))),
 
     // HARD
+	BECOME_FIGHT_PITS_CHAMPION(
+	    "Become the champion of the Fight Pits.",
+	    AD_GROUP.KARAMJA_HARD),
+	KILL_KET_ZEK(
+	    "Successfully kill a Ket-Zek in the Fight Caves.",
+	    AD_GROUP.KARAMJA_HARD),
+	EAT_OOMLIE_WRAP(
+	    "Eat an Oomlie wrap.",
+	    AD_GROUP.KARAMJA_HARD),
 	CRAFT_NATURE_RUNES(
 	    "Craft some nature runes from Essence.",
 	    AD_GROUP.KARAMJA_HARD,
@@ -146,12 +177,18 @@ public enum AD_KARAMJA_TASK implements AD_TASK
 	    new AD_COMBAT_LEVEL_REQUIREMENT(100),
 	    new AD_SKILL_REQUIREMENT(Skill.SLAYER, 50),
 	    new AD_QUEST_REQUIREMENT(Quest.SHILO_VILLAGE, QuestState.FINISHED)),
+	KILL_BRIMHAVEN_METAL_DRAGON(
+	    "Kill a metal dragon in Brimhaven Dungeon.",
+	    AD_GROUP.KARAMJA_HARD),
 
     // ELITE
 	CRAFT_56_NATURE_RUNES(
 	    "Craft 56 Nature runes simultaneously from Essence without the use of Extracts.",
 	    AD_GROUP.KARAMJA_ELITE,
 	    new AD_SKILL_REQUIREMENT(Skill.RUNECRAFT, 91)),
+	EQUIP_FIRE_OR_INFERNAL_CAPE(
+	    "Equip a fire cape or infernal cape in Mor Ul Rek.",
+	    AD_GROUP.KARAMJA_ELITE),
 	CHECK_BRIMHAVEN_PALM_TREE(
 	    "Check the health of a palm tree in Brimhaven.",
 	    AD_GROUP.KARAMJA_ELITE,
@@ -177,7 +214,7 @@ public enum AD_KARAMJA_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

@@ -1,12 +1,14 @@
 
 package com.gielinor_sessions.player_state_domain;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import com.gielinor_sessions.resources.DiaryService;
 
 import lombok.Getter;
-
+import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
@@ -23,6 +25,7 @@ import net.runelite.api.gameval.VarPlayerID;
  * - On achievement diary change
  */
 
+@Slf4j
 @Getter
 public class PlayerStateService
 {
@@ -81,6 +84,16 @@ public class PlayerStateService
 
 		playerState.setCombatLevel(
 		    client.getLocalPlayer().getCombatLevel());
+
+		log.info("Skills Matched: {}", playerState.getLevels().size());
+
+		for (Map.Entry<Skill, Integer> entry : playerState.getLevels().entrySet())
+		{
+			log.info("Skill: {} | Level: {} | Exeperience: {}",
+			    entry.getKey().getName(),
+			    client.getRealSkillLevel(entry.getKey()),
+			    entry.getValue());
+		}
 	}
 
 	// --------------------------------------------------
@@ -135,5 +148,6 @@ public class PlayerStateService
 	public void updateAchievementDiaries()
 	{
 		diaryService.updateAchievementDiaries(playerState);
+
 	}
 }

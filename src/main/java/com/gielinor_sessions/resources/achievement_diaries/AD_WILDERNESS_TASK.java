@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -16,10 +17,31 @@ public enum AD_WILDERNESS_TASK implements AD_TASK
 	    "Cast Low Alchemy at the Fountain of Rune.",
 	    AD_GROUP.WILDERNESS_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.MAGIC, 21)),
+	ENTER_WILDERNESS_VIA_LEVER(
+	    "Enter the Wilderness from the Ardougne or Edgeville lever.",
+	    AD_GROUP.WILDERNESS_EASY),
+	PRAY_WESTERN_WILDERNESS_CHAOS_ALTAR(
+	    "Pray at the Chaos Altar in Western Wilderness.",
+	    AD_GROUP.WILDERNESS_EASY),
+	ENTER_CHAOS_RUNECRAFTING_TEMPLE(
+	    "Enter the Chaos Runecrafting Temple.",
+	    AD_GROUP.WILDERNESS_EASY),
+	KILL_WILDERNESS_MAMMOTH(
+	    "Kill a Mammoth in the Wilderness.",
+	    AD_GROUP.WILDERNESS_EASY),
 	KILL_EARTH_WARRIOR(
 	    "Kill an Earth Warrior in the Wilderness beneath Edgeville.",
 	    AD_GROUP.WILDERNESS_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.AGILITY, 15)),
+	RESTORE_PRAYER_DEMONIC_RUINS(
+	    "Restore some prayer points at the Demonic Ruins.",
+	    AD_GROUP.WILDERNESS_EASY),
+	ENTER_KING_BLACK_DRAGON_LAIR(
+	    "Enter the King Black Dragon's lair.",
+	    AD_GROUP.WILDERNESS_EASY),
+	COLLECT_RED_SPIDERS_EGGS(
+	    "Collect 5 Red spiders' eggs from the Wilderness.",
+	    AD_GROUP.WILDERNESS_EASY),
 	MINE_WILDERNESS_IRON(
 	    "Mine some Iron ore in the Wilderness.",
 	    AD_GROUP.WILDERNESS_EASY,
@@ -28,6 +50,9 @@ public enum AD_WILDERNESS_TASK implements AD_TASK
 	    "Have the Mage of Zamorak teleport you to the Abyss.",
 	    AD_GROUP.WILDERNESS_EASY,
 	    new AD_QUEST_REQUIREMENT(Quest.ENTER_THE_ABYSS, QuestState.FINISHED)),
+	EQUIP_WILDERNESS_TEAM_CAPE(
+	    "Equip any Team cape in the Wilderness.",
+	    AD_GROUP.WILDERNESS_EASY),
 
     // MEDIUM
 	MINE_WILDERNESS_MITHRIL(
@@ -48,6 +73,12 @@ public enum AD_WILDERNESS_TASK implements AD_TASK
 	    "Complete a lap of the Wilderness Agility course.",
 	    AD_GROUP.WILDERNESS_MEDIUM,
 	    new AD_SKILL_REQUIREMENT(Skill.AGILITY, 52)),
+	KILL_GREEN_DRAGON(
+	    "Kill a Green Dragon.",
+	    AD_GROUP.WILDERNESS_MEDIUM),
+	KILL_WILDERNESS_ANKOU(
+	    "Kill an Ankou in the Wilderness.",
+	    AD_GROUP.WILDERNESS_MEDIUM),
 	CHARGE_EARTH_ORB(
 	    "Charge an Earth Orb.",
 	    AD_GROUP.WILDERNESS_MEDIUM,
@@ -56,11 +87,17 @@ public enum AD_WILDERNESS_TASK implements AD_TASK
 	    "Kill a Bloodveld in the Wilderness Godwars Dungeon.",
 	    AD_GROUP.WILDERNESS_MEDIUM,
 	    new AD_SKILL_REQUIREMENT(Skill.SLAYER, 50)),
+	TALK_EMBLEM_TRADER(
+	    "Talk to the Emblem Trader in Edgeville about emblems.",
+	    AD_GROUP.WILDERNESS_MEDIUM),
 	SMITH_RESOURCE_AREA_GOLDEN_HELMET(
 	    "Smith a Golden helmet in the Resource Area.",
 	    AD_GROUP.WILDERNESS_MEDIUM,
 	    new AD_SKILL_REQUIREMENT(Skill.SMITHING, 50),
 	    new AD_QUEST_REQUIREMENT(Quest.BETWEEN_A_ROCK, QuestState.IN_PROGRESS)),
+	OPEN_LAVA_MAZE_MUDDY_CHEST(
+	    "Open the Muddy Chest in the Lava Maze.",
+	    AD_GROUP.WILDERNESS_MEDIUM),
 
     // HARD
 	CAST_GOD_SPELL_WILDERNESS(
@@ -80,6 +117,15 @@ public enum AD_WILDERNESS_TASK implements AD_TASK
 	    "Smith an Adamant scimitar in the Resource Area.",
 	    AD_GROUP.WILDERNESS_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.SMITHING, 75)),
+	KILL_LAVA_DRAGON(
+	    "Kill a Lava Dragon.",
+	    AD_GROUP.WILDERNESS_HARD),
+	KILL_CHAOS_ELEMENTAL(
+	    "Kill the Chaos Elemental.",
+	    AD_GROUP.WILDERNESS_HARD),
+	KILL_WILDERNESS_DEMI_BOSSES(
+	    "Kill the Crazy Arc. Chaos Fanatic & Scorpia.",
+	    AD_GROUP.WILDERNESS_HARD),
 	USE_TROLLHEIM_WILDERNESS_SHORTCUT(
 	    "Take the agility shortcut from Trollheim into the Wilderness.",
 	    AD_GROUP.WILDERNESS_HARD,
@@ -95,6 +141,9 @@ public enum AD_WILDERNESS_TASK implements AD_TASK
 	    new AD_SKILL_REQUIREMENT(Skill.FISHING, 53)),
 
     // ELITE
+	KILL_WILDERNESS_BOSSES(
+	    "Kill Callisto, Venenatis & Vet'ion.",
+	    AD_GROUP.WILDERNESS_ELITE),
 	TELEPORT_GHORROCK(
 	    "Teleport to Ghorrock.",
 	    AD_GROUP.WILDERNESS_ELITE,
@@ -139,7 +188,7 @@ public enum AD_WILDERNESS_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

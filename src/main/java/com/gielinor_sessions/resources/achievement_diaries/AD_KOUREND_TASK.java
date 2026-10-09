@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -16,14 +17,35 @@ public enum AD_KOUREND_TASK implements AD_TASK
 	    "Mine some Iron at the Mount Karuulm mine.",
 	    AD_GROUP.KOUREND_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.MINING, 15)),
+	KILL_SANDCRAB(
+	    "Kill a sandcrab.",
+	    AD_GROUP.KOUREND_EASY),
+	HAND_IN_ARCEUUS_LIBRARY_BOOK(
+	    "Hand in a book at the Arceuus Library.",
+	    AD_GROUP.KOUREND_EASY),
 	STEAL_HOSIDIUS_FOOD_STALL(
 	    "Steal from a Hosidius Food Stall.",
 	    AD_GROUP.KOUREND_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.THIEVING, 25)),
+	BROWSE_WARRENS_GENERAL_STORE(
+	    "Browse the Warrens General Store.",
+	    AD_GROUP.KOUREND_EASY),
+	TAKE_BOAT_LANDS_END(
+	    "Take a boat to Land's End.",
+	    AD_GROUP.KOUREND_EASY),
+	PRAY_KOUREND_CASTLE_ALTAR(
+	    "Pray at the altar in Kourend Castle.",
+	    AD_GROUP.KOUREND_EASY),
+	DIG_SALTPETRE(
+	    "Dig up some saltpetre.",
+	    AD_GROUP.KOUREND_EASY),
 	ENTER_HOSIDIUS_POH(
 	    "Enter your Player Owned House from Hosidius.",
 	    AD_GROUP.KOUREND_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.CONSTRUCTION, 25)),
+	COMPLETE_SHAYZIEN_AGILITY(
+	    "Do a lap of either tier of the Shayzien agility course.",
+	    AD_GROUP.KOUREND_EASY),
 	CREATE_STRENGTH_POTION(
 	    "Create a Strength potion in the Lovakengj Pub.",
 	    AD_GROUP.KOUREND_EASY,
@@ -38,6 +60,9 @@ public enum AD_KOUREND_TASK implements AD_TASK
 	    "Travel to the Fairy Ring south of Mount Karuulm.",
 	    AD_GROUP.KOUREND_MEDIUM,
 	    new AD_QUEST_REQUIREMENT(Quest.FAIRYTALE_II__CURE_A_QUEEN, QuestState.IN_PROGRESS)),
+	KILL_LIZARDMAN(
+	    "Kill a lizardman.",
+	    AD_GROUP.KOUREND_MEDIUM),
 	TELEPORT_FIVE_KOUREND_CITIES(
 	    "Use Kharedst's memoirs to teleport to all five cities in Great Kourend.",
 	    AD_GROUP.KOUREND_MEDIUM,
@@ -54,11 +79,17 @@ public enum AD_KOUREND_TASK implements AD_TASK
 	    "Enter the Farming Guild.",
 	    AD_GROUP.KOUREND_MEDIUM,
 	    new AD_SKILL_REQUIREMENT(Skill.FARMING, 45)),
+	SWITCH_NECROMANCY_SPELLBOOK(
+	    "Switch to the Necromancy spellbook at Tyss.",
+	    AD_GROUP.KOUREND_MEDIUM),
 	REPAIR_PISCARILIUS_CRANE(
 	    "Repair a Piscarilius crane.",
 	    AD_GROUP.KOUREND_MEDIUM,
 	    new AD_SKILL_REQUIREMENT(Skill.CRAFTING, 30),
 	    new AD_SKILL_REQUIREMENT(Skill.CONSTRUCTION, 30)),
+	DELIVER_INTELLIGENCE_CAPTAIN_GINEA(
+	    "Deliver some intelligence to Captain Ginea.",
+	    AD_GROUP.KOUREND_MEDIUM),
 	CATCH_MOLCH_BLUEGILL(
 	    "Catch a Bluegill on Molch Island.",
 	    AD_GROUP.KOUREND_MEDIUM,
@@ -92,6 +123,9 @@ public enum AD_KOUREND_TASK implements AD_TASK
 	    AD_GROUP.KOUREND_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.SMITHING, 70),
 	    new AD_QUEST_REQUIREMENT(Quest.THE_FORSAKEN_TOWER, QuestState.IN_PROGRESS)),
+	KILL_LIZARDMAN_SHAMAN(
+	    "Kill a Lizardman Shaman in the Lizardman Temple.",
+	    AD_GROUP.KOUREND_HARD),
 	MINE_LOVAKITE(
 	    "Mine some Lovakite.",
 	    AD_GROUP.KOUREND_HARD,
@@ -100,6 +134,12 @@ public enum AD_KOUREND_TASK implements AD_TASK
 	    "Plant some Logavano seeds at the Tithe Farm.",
 	    AD_GROUP.KOUREND_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.FARMING, 74)),
+	KILL_SHAYZIEN_CRYPTS_ZOMBIE(
+	    "Kill a zombie in the Shayzien Crypts.",
+	    AD_GROUP.KOUREND_HARD),
+	TELEPORT_XERICS_HEART(
+	    "Teleport to Xeric's Heart using Xeric's Talisman.",
+	    AD_GROUP.KOUREND_HARD),
 	DELIVER_CAPTAIN_KHALED_ARTEFACT(
 	    "Deliver an artefact to Captain Khaled.",
 	    AD_GROUP.KOUREND_HARD,
@@ -125,6 +165,9 @@ public enum AD_KOUREND_TASK implements AD_TASK
 	    "Chop some Redwood logs.",
 	    AD_GROUP.KOUREND_ELITE,
 	    new AD_SKILL_REQUIREMENT(Skill.WOODCUTTING, 90)),
+	DEFEAT_SKOTIZO(
+	    "Defeat Skotizo in the Catacombs of Kourend.",
+	    AD_GROUP.KOUREND_ELITE),
 	CATCH_COOK_ANGLERFISH(
 	    "Catch an Anglerfish and cook it whilst in Great Kourend.",
 	    AD_GROUP.KOUREND_ELITE,
@@ -140,6 +183,9 @@ public enum AD_KOUREND_TASK implements AD_TASK
 	    new AD_SKILL_REQUIREMENT(Skill.MAGIC, 90),
 	    new AD_SKILL_REQUIREMENT(Skill.MINING, 38),
 	    new AD_SKILL_REQUIREMENT(Skill.CRAFTING, 38)),
+	COMPLETE_CHAMBERS_OF_XERIC_RAID(
+	    "Complete a raid in the Chambers of Xeric.",
+	    AD_GROUP.KOUREND_ELITE),
 	CREATE_FARMING_GUILD_BATTLESTAFF(
 	    "Create your own Battlestaff from scratch within the Farming Guild.",
 	    AD_GROUP.KOUREND_ELITE,
@@ -158,7 +204,7 @@ public enum AD_KOUREND_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

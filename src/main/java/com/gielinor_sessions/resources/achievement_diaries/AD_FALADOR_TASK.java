@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -20,6 +21,30 @@ public enum AD_FALADOR_TASK implements AD_TASK
 	    "Climb over the western Falador wall.",
 	    AD_GROUP.FALADOR_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.AGILITY, 5)),
+	BROWSE_SARAH_FARM_SHOP(
+	    "Browse Sarah's farm shop.",
+	    AD_GROUP.FALADOR_EASY),
+	GET_FALADOR_HAIRCUT(
+	    "Get a haircut or a shave from the Falador hairdresser.",
+	    AD_GROUP.FALADOR_EASY),
+	FILL_FALADOR_PUMP_BUCKET(
+	    "Fill a bucket from the pump north of Falador west bank.",
+	    AD_GROUP.FALADOR_EASY),
+	KILL_FALADOR_PARK_DUCK(
+	    "Kill a duck in Falador park.",
+	    AD_GROUP.FALADOR_EASY),
+	MAKE_MIND_TIARA(
+	    "Make a mind tiara.",
+	    AD_GROUP.FALADOR_EASY),
+	TAKE_BOAT_ENTRANA(
+	    "Take the boat to Entrana.",
+	    AD_GROUP.FALADOR_EASY),
+	REPAIR_MOTHERLODE_STRUT(
+	    "Repair a broken strut in the Motherlode Mine.",
+	    AD_GROUP.FALADOR_EASY),
+	CLAIM_SECURITY_BOOK(
+	    "Claim a security book from the security guard at Port Sarim jail.",
+	    AD_GROUP.FALADOR_EASY),
 	SMITH_BLURITE_LIMBS(
 	    "Smith some Blurite Limbs on Doric's Anvil.",
 	    AD_GROUP.FALADOR_EASY,
@@ -37,6 +62,9 @@ public enum AD_FALADOR_TASK implements AD_TASK
 	    "Telegrab some Wine of Zamorak at the Chaos Temple by the Wilderness.",
 	    AD_GROUP.FALADOR_MEDIUM,
 	    new AD_SKILL_REQUIREMENT(Skill.MAGIC, 33)),
+	UNLOCK_TAVERLEY_CRYSTAL_CHEST(
+	    "Unlock the crystal chest in Taverley",
+	    AD_GROUP.FALADOR_MEDIUM),
 	PLACE_SCARECROW(
 	    "Place a Scarecrow in the Falador farming patch.",
 	    AD_GROUP.FALADOR_MEDIUM,
@@ -98,6 +126,9 @@ public enum AD_FALADOR_TASK implements AD_TASK
 	    "Change your family crest to the Saradomin symbol.",
 	    AD_GROUP.FALADOR_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.PRAYER, 70)),
+	KILL_GIANT_MOLE(
+	    "Kill the Giant Mole beneath Falador park.",
+	    AD_GROUP.FALADOR_HARD),
 	KILL_SKELETAL_WYVERN(
 	    "Kill a Skeletal Wyvern in the Asgarnia Ice Dungeon.",
 	    AD_GROUP.FALADOR_HARD,
@@ -123,6 +154,9 @@ public enum AD_FALADOR_TASK implements AD_TASK
 	    AD_GROUP.FALADOR_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.DEFENCE, 30),
 	    new AD_QUEST_REQUIREMENT(Quest.THE_SLUG_MENACE, QuestState.FINISHED)),
+	ENTER_WARRIORS_GUILD(
+	    "Enter the Warriors' Guild.",
+	    AD_GROUP.FALADOR_HARD),
 	EQUIP_DWARVEN_HELMET(
 	    "Equip a dwarven helmet within the dwarven mines.",
 	    AD_GROUP.FALADOR_HARD,
@@ -143,6 +177,9 @@ public enum AD_FALADOR_TASK implements AD_TASK
 	    AD_GROUP.FALADOR_ELITE,
 	    new AD_SKILL_REQUIREMENT(Skill.FARMING, 91),
 	    new AD_SKILL_REQUIREMENT(Skill.WOODCUTTING, 75)),
+	PERFORM_CAPE_EMOTE_FALADOR_CASTLE(
+	    "Perform a skillcape or quest cape emote at the top of Falador Castle.",
+	    AD_GROUP.FALADOR_ELITE),
 	JUMP_TAVERLEY_STRANGE_FLOOR(
 	    "Jump over the strange floor in Taverley dungeon.",
 	    AD_GROUP.FALADOR_ELITE,
@@ -164,7 +201,7 @@ public enum AD_FALADOR_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

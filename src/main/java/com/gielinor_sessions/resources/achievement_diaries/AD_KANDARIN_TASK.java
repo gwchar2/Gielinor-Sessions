@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -16,14 +17,35 @@ public enum AD_KANDARIN_TASK implements AD_TASK
 	    "Catch a Mackerel at Catherby.",
 	    AD_GROUP.KANDARIN_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.FISHING, 16)),
+	BUY_CANDLE_CATHERBY(
+	    "Buy a candle from the Chandler in Catherby.",
+	    AD_GROUP.KANDARIN_EASY),
+	COLLECT_SEERS_FLAX(
+	    "Collect five flax from the Seers' flax fields.",
+	    AD_GROUP.KANDARIN_EASY),
+	PLAY_SEERS_CHURCH_ORGAN(
+	    "Play the organ in Seers' church.",
+	    AD_GROUP.KANDARIN_EASY),
 	PLANT_JUTE_SEEDS(
 	    "Plant some Jute seeds in the patch north of McGrubor's Wood.",
 	    AD_GROUP.KANDARIN_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.FARMING, 13)),
+	HAVE_TEA_WITH_GALAHAD(
+	    "Have Galahad make you a cup of tea.",
+	    AD_GROUP.KANDARIN_EASY),
 	DEFEAT_ELEMENTALS(
 	    "Defeat one of each elemental in the workshop.",
 	    AD_GROUP.KANDARIN_EASY,
 	    new AD_QUEST_REQUIREMENT(Quest.ELEMENTAL_WORKSHOP_I, QuestState.IN_PROGRESS)),
+	GET_PET_FISH(
+	    "Get a pet fish from Harry in Catherby.",
+	    AD_GROUP.KANDARIN_EASY),
+	BUY_SEERS_STEW(
+	    "Buy a stew from the Seers' pub.",
+	    AD_GROUP.KANDARIN_EASY),
+	SPEAK_TO_SHERLOCK(
+	    "Speak to Sherlock.",
+	    AD_GROUP.KANDARIN_EASY),
 	CROSS_COAL_TRUCK_LOG(
 	    "Cross the Coal truck log shortcut.",
 	    AD_GROUP.KANDARIN_EASY,
@@ -74,6 +96,9 @@ public enum AD_KANDARIN_TASK implements AD_TASK
 	    "Kill a Fire Giant inside Baxtorian Waterfall.",
 	    AD_GROUP.KANDARIN_MEDIUM,
 	    new AD_QUEST_REQUIREMENT(Quest.WATERFALL_QUEST, QuestState.IN_PROGRESS)),
+	COMPLETE_BARBARIAN_ASSAULT_WAVE(
+	    "Complete a wave of Barbarian Assault.",
+	    AD_GROUP.KANDARIN_MEDIUM),
 	STEAL_HEMENSTER_CHEST(
 	    "Steal from the chest in Hemenster.",
 	    AD_GROUP.KANDARIN_MEDIUM,
@@ -123,6 +148,9 @@ public enum AD_KANDARIN_TASK implements AD_TASK
 	    AD_GROUP.KANDARIN_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.THIEVING, 53),
 	    new AD_QUEST_REQUIREMENT(Quest.DESERT_TREASURE_I, QuestState.IN_PROGRESS)),
+	KILL_MITHRIL_DRAGON(
+	    "Kill a Mithril dragon.",
+	    AD_GROUP.KANDARIN_HARD),
 	EQUIP_GRANITE_BODY(
 	    "Purchase and equip a granite body from Barbarian Assault.",
 	    AD_GROUP.KANDARIN_HARD,
@@ -139,6 +167,9 @@ public enum AD_KANDARIN_TASK implements AD_TASK
 	    new AD_QUEST_REQUIREMENT(Quest.TAI_BWO_WANNAI_TRIO, QuestState.FINISHED)),
 
     // ELITE
+	READ_BARBARIAN_ASSAULT_BLACKBOARD(
+	    "Read the blackboard at Barbarian Assault after reaching level 5 in every role.",
+	    AD_GROUP.KANDARIN_ELITE),
 	PICK_DWARF_WEED(
 	    "Pick some Dwarf weed from the herb patch at Catherby.",
 	    AD_GROUP.KANDARIN_ELITE,
@@ -181,7 +212,7 @@ public enum AD_KANDARIN_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -11,17 +12,6 @@ import com.gielinor_sessions.resources.achievement_diaries.requirements.*;
 @Getter
 public enum AD_ARDOUGNE_TASK implements AD_TASK
 {
-    /*
-     * Keep your existing Ardougne entries here.
-     *
-     * Example shape:
-     *
-     * SOME_TASK(
-     * "Task description",
-     * AD_GROUP.ARDOUGNE_EASY,
-     * new AD_SKILL_REQUIREMENT(Skill.AGILITY, 20),
-     * new AD_QUEST_REQUIREMENT(Quest.SOME_QUEST)),
-     */
     // EASY
 	ESS_MINE(
 	    "Have Wizard Cromperty teleport you to the Rune Essence mine.",
@@ -31,10 +21,31 @@ public enum AD_ARDOUGNE_TASK implements AD_TASK
 	    "Steal a cake from the Ardougne market stalls.",
 	    AD_GROUP.ARDOUGNE_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.THIEVING, 5)),
+	SELL_SILK(
+	    "Sell silk to Silk Trader in Ardougne for 60 coins each.",
+	    AD_GROUP.ARDOUGNE_EASY),
+	USE_EAST_ARDOUGNE_ALTAR(
+	    "Use the altar in East Ardougne's church.",
+	    AD_GROUP.ARDOUGNE_EASY),
+	GO_FISHING_TRAWLER(
+	    "Go out fishing on the Fishing Trawler.",
+	    AD_GROUP.ARDOUGNE_EASY),
 	ENTER_COMBAT_TRAINING_CAMP(
 	    "Enter the Combat Training Camp north of W. Ardougne.",
 	    AD_GROUP.ARDOUGNE_EASY,
 	    new AD_QUEST_REQUIREMENT(Quest.BIOHAZARD, QuestState.FINISHED)),
+	IDENTIFY_RUSTED_SWORD(
+	    "Have Tindel Marchant identify a rusted sword for you.",
+	    AD_GROUP.ARDOUGNE_EASY),
+	USE_ARDOUGNE_WILDERNESS_LEVER(
+	    "Use the Ardougne lever to teleport to the Wilderness.",
+	    AD_GROUP.ARDOUGNE_EASY),
+	VIEW_ALECK_HUNTER_EMPORIUM(
+	    "View Aleck's Hunter Emporium in Yanille.",
+	    AD_GROUP.ARDOUGNE_EASY),
+	CHECK_PROBITA_INSURED_PETS(
+	    "Check what pets you have insured with Probita in Ardougne.",
+	    AD_GROUP.ARDOUGNE_EASY),
 
     // MEDIUM
 	ENTER_UNICORN_PEN(
@@ -196,7 +207,7 @@ public enum AD_ARDOUGNE_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -12,6 +13,10 @@ import com.gielinor_sessions.resources.achievement_diaries.requirements.*;
 public enum AD_LUMBRIDGE_TASK implements AD_TASK
 {
     // EASY
+	COMPLETE_DRAYNOR_AGILITY(
+	    "Complete a lap of the Draynor Village agility course.",
+	    AD_GROUP.LUMBRIDGE_EASY,
+	    new AD_SKILL_REQUIREMENT(Skill.AGILITY, 10)),
 	SLAY_CAVE_BUG(
 	    "Slay a Cave bug beneath Lumbridge Swamp.",
 	    AD_GROUP.LUMBRIDGE_EASY,
@@ -24,11 +29,20 @@ public enum AD_LUMBRIDGE_TASK implements AD_TASK
 	    "Craft some water runes from Essence.",
 	    AD_GROUP.LUMBRIDGE_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.RUNECRAFT, 5)),
+	LEARN_AGE_FROM_HANS(
+	    "Learn your age from Hans in Lumbridge.",
+	    AD_GROUP.LUMBRIDGE_EASY),
+	PICKPOCKET_LUMBRIDGE_CITIZEN(
+	    "Pickpocket a man or woman in Lumbridge.",
+	    AD_GROUP.LUMBRIDGE_EASY),
 	CHOP_BURN_OAK_LOGS(
 	    "Chop and burn some oak logs in Lumbridge.",
 	    AD_GROUP.LUMBRIDGE_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.WOODCUTTING, 15),
 	    new AD_SKILL_REQUIREMENT(Skill.FIREMAKING, 15)),
+	KILL_DRAYNOR_ZOMBIE(
+	    "Kill a zombie in Draynor sewers.",
+	    AD_GROUP.LUMBRIDGE_EASY),
 	CATCH_AL_KHARID_ANCHOVIES(
 	    "Catch some Anchovies in Al Kharid.",
 	    AD_GROUP.LUMBRIDGE_EASY,
@@ -41,6 +55,9 @@ public enum AD_LUMBRIDGE_TASK implements AD_TASK
 	    "Mine some Iron ore at the Al Kharid mine.",
 	    AD_GROUP.LUMBRIDGE_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.MINING, 15)),
+	ENTER_HAM_HIDEOUT(
+	    "Enter the H.A.M. hideout.",
+	    AD_GROUP.LUMBRIDGE_EASY),
 
     // MEDIUM
 	COMPLETE_AL_KHARID_AGILITY(
@@ -170,7 +187,10 @@ public enum AD_LUMBRIDGE_TASK implements AD_TASK
 	CRAFT_140_WATER_RUNES(
 	    "Craft 140 or more Water runes simultaneously from Essence without the use of Extracts.",
 	    AD_GROUP.LUMBRIDGE_ELITE,
-	    new AD_SKILL_REQUIREMENT(Skill.RUNECRAFT, 76));
+	    new AD_SKILL_REQUIREMENT(Skill.RUNECRAFT, 76)),
+	PERFORM_QUEST_CAPE_EMOTE(
+	    "Perform the Quest Cape emote in the Wise Old Man's house.",
+	    AD_GROUP.LUMBRIDGE_ELITE);
 
 	private final String description;
 	private final AD_GROUP group;
@@ -184,7 +204,7 @@ public enum AD_LUMBRIDGE_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

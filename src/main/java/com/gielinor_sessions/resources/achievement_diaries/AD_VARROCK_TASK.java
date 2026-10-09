@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -12,6 +13,9 @@ import com.gielinor_sessions.resources.achievement_diaries.requirements.*;
 public enum AD_VARROCK_TASK implements AD_TASK
 {
     // EASY
+	BROWSE_THESSALIA_STORE(
+	    "Browse Thessalia's store.",
+	    AD_GROUP.VARROCK_EASY),
 	TELEPORT_ESSENCE_MINE_AUBURY(
 	    "Have Aubury teleport you to the Essence mine.",
 	    AD_GROUP.VARROCK_EASY,
@@ -20,14 +24,32 @@ public enum AD_VARROCK_TASK implements AD_TASK
 	    "Mine some Iron in the south east mining patch near Varrock.",
 	    AD_GROUP.VARROCK_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.MINING, 15)),
+	MAKE_NORMAL_PLANK(
+	    "Make a normal plank at the sawmill.",
+	    AD_GROUP.VARROCK_EASY),
+	ENTER_STRONGHOLD_SECOND_LEVEL(
+	    "Enter the second level of the Stronghold of Security.",
+	    AD_GROUP.VARROCK_EASY),
 	JUMP_VARROCK_FENCE(
 	    "Jump over the fence south of Varrock.",
 	    AD_GROUP.VARROCK_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.AGILITY, 13)),
+	CHOP_DYING_TREE(
+	    "Chop down a dying tree in the Lumber Yard.",
+	    AD_GROUP.VARROCK_EASY),
+	BUY_NEWSPAPER(
+	    "Buy a newspaper.",
+	    AD_GROUP.VARROCK_EASY),
+	GIVE_DOG_BONE(
+	    "Give a dog a bone!",
+	    AD_GROUP.VARROCK_EASY),
 	CRAFT_BARBARIAN_VILLAGE_BOWL(
 	    "Spin a bowl on the pottery wheel and fire it in the oven in Barb Village.",
 	    AD_GROUP.VARROCK_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.CRAFTING, 8)),
+	SPEAK_HAIG_HALEN_50_KUDOS(
+	    "Speak to Haig Halen after obtaining at least 50 Kudos.",
+	    AD_GROUP.VARROCK_EASY),
 	CRAFT_EARTH_RUNES(
 	    "Craft some Earth runes from Essence.",
 	    AD_GROUP.VARROCK_EASY,
@@ -42,6 +64,9 @@ public enum AD_VARROCK_TASK implements AD_TASK
 	    new AD_SKILL_REQUIREMENT(Skill.THIEVING, 5)),
 
     // MEDIUM
+	APOTHECARY_STRENGTH_POTION(
+	    "Have the Apothecary in Varrock make you a strength potion.",
+	    AD_GROUP.VARROCK_MEDIUM),
 	ENTER_CHAMPIONS_GUILD(
 	    "Enter the Champions' Guild.",
 	    AD_GROUP.VARROCK_MEDIUM,
@@ -55,6 +80,9 @@ public enum AD_VARROCK_TASK implements AD_TASK
 	    "Use the spirit tree north of Varrock.",
 	    AD_GROUP.VARROCK_MEDIUM,
 	    new AD_QUEST_REQUIREMENT(Quest.TREE_GNOME_VILLAGE, QuestState.FINISHED)),
+	PERFORM_STRONGHOLD_EMOTES(
+	    "Perform the 4 emotes from the Stronghold of Security.",
+	    AD_GROUP.VARROCK_MEDIUM),
 	ENTER_TOLNA_DUNGEON(
 	    "Enter the Tolna dungeon after completing A Soul's Bane.",
 	    AD_GROUP.VARROCK_MEDIUM,
@@ -71,6 +99,9 @@ public enum AD_VARROCK_TASK implements AD_TASK
 	    "Get a Slayer task from Vannaka.",
 	    AD_GROUP.VARROCK_MEDIUM,
 	    new AD_COMBAT_LEVEL_REQUIREMENT(40)),
+	MAKE_20_MAHOGANY_PLANKS(
+	    "Make 20 mahogany planks in one go.",
+	    AD_GROUP.VARROCK_MEDIUM),
 	PICK_WHITE_TREE_FRUIT(
 	    "Pick a White tree fruit.",
 	    AD_GROUP.VARROCK_MEDIUM,
@@ -91,6 +122,9 @@ public enum AD_VARROCK_TASK implements AD_TASK
 	    "Trade furs with the Fancy Dress Seller for a spottier cape and equip it.",
 	    AD_GROUP.VARROCK_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.HUNTER, 66)),
+	SPEAK_ORLANDO_SMITH_153_KUDOS(
+	    "Speak to Orlando Smith when you have achieved 153 Kudos.",
+	    AD_GROUP.VARROCK_HARD),
 	MAKE_EDGEVILLE_WAKA_CANOE(
 	    "Make a Waka Canoe near Edgeville.",
 	    AD_GROUP.VARROCK_HARD,
@@ -100,6 +134,9 @@ public enum AD_VARROCK_TASK implements AD_TASK
 	    AD_GROUP.VARROCK_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.MAGIC, 54),
 	    new AD_QUEST_REQUIREMENT(Quest.DESERT_TREASURE_I, QuestState.FINISHED)),
+	TELEPORT_BARBARIAN_VILLAGE_SKULL_SCEPTRE(
+	    "Teleport to Barbarian Village with a skull sceptre.",
+	    AD_GROUP.VARROCK_HARD),
 	CHOP_BURN_VARROCK_YEW_LOGS(
 	    "Chop some yew logs in Varrock and burn them at the top of the Varrock church.",
 	    AD_GROUP.VARROCK_HARD,
@@ -119,7 +156,7 @@ public enum AD_VARROCK_TASK implements AD_TASK
 	    AD_GROUP.VARROCK_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.PRAYER, 52)),
 	SQUEEZE_EDGEVILLE_DUNGEON_PIPE(
-	    "Squeeze through the obstacle pipe in Edgeville dungeon.",
+	    "Squeeze through an obstacle pipe in Edgeville dungeon.",
 	    AD_GROUP.VARROCK_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.AGILITY, 51)),
 
@@ -161,8 +198,7 @@ public enum AD_VARROCK_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
-
 }

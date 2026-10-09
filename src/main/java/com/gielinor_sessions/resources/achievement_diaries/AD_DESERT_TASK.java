@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -20,11 +21,35 @@ public enum AD_DESERT_TASK implements AD_TASK
 	    "Mine 5 clay in the north-eastern desert.",
 	    AD_GROUP.DESERT_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.MINING, 5)),
+	ENTER_KALPHITE_HIVE(
+	    "Enter the Kalphite Hive.",
+	    AD_GROUP.DESERT_EASY),
+	ENTER_DESERT_ROBES(
+	    "Enter the Desert with a set of desert robes equipped.",
+	    AD_GROUP.DESERT_EASY),
+	KILL_VULTURE(
+	    "Kill a vulture.",
+	    AD_GROUP.DESERT_EASY),
+	CLEAN_HERB_NARDAH(
+	    "Have the Nardah herbalist clean a herb for you.",
+	    AD_GROUP.DESERT_EASY),
+	COLLECT_POTATO_CACTUS(
+	    "Collect 5 potato cactus from the Kalphite Hive.",
+	    AD_GROUP.DESERT_EASY),
+	SELL_ARTEFACTS_SIMON_TEMPLETON(
+	    "Sell some artefacts to Simon Templeton.",
+	    AD_GROUP.DESERT_EASY),
 	OPEN_PYRAMID_PLUNDER_SARCOPHAGUS(
 	    "Open the Sarcophagus in the first room of Pyramid Plunder.",
 	    AD_GROUP.DESERT_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.THIEVING, 21),
 	    new AD_QUEST_REQUIREMENT(Quest.ICTHLARINS_LITTLE_HELPER, QuestState.IN_PROGRESS)),
+	FILL_WATERSKIN_DESERT_CACTUS(
+	    "Cut a desert cactus open to fill a waterskin.",
+	    AD_GROUP.DESERT_EASY),
+	TRAVEL_SHANTAY_POLLNIVNEACH_CARPET(
+	    "Travel from the Shantay Pass to Pollnivneach by Magic Carpet.",
+	    AD_GROUP.DESERT_EASY),
 
     // MEDIUM
 	CLIMB_AGILITY_PYRAMID(
@@ -91,6 +116,9 @@ public enum AD_DESERT_TASK implements AD_TASK
 	    AD_GROUP.DESERT_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.MAGIC, 68),
 	    new AD_QUEST_REQUIREMENT(Quest.DREAM_MENTOR, QuestState.FINISHED)),
+	KILL_KALPHITE_QUEEN(
+	    "Kill the Kalphite Queen.",
+	    AD_GROUP.DESERT_HARD),
 	COMPLETE_POLLNIVNEACH_AGILITY(
 	    "Complete a lap of the Pollnivneach agility course.",
 	    AD_GROUP.DESERT_HARD,
@@ -163,7 +191,7 @@ public enum AD_DESERT_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

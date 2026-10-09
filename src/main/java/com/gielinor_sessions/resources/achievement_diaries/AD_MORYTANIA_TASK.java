@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -28,10 +29,22 @@ public enum AD_MORYTANIA_TASK implements AD_TASK
 	    "Kill a Banshee in the Slayer Tower.",
 	    AD_GROUP.MORYTANIA_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.SLAYER, 15)),
+	TAN_LEATHER_SBOTT(
+	    "Have Sbott in Canifis tan something for you.",
+	    AD_GROUP.MORYTANIA_EASY),
+	ENTER_MORT_MYRE_SWAMP(
+	    "Enter Mort Myre Swamp.",
+	    AD_GROUP.MORYTANIA_EASY),
+	KILL_GHOUL(
+	    "Kill a Ghoul.",
+	    AD_GROUP.MORYTANIA_EASY),
 	PLACE_MORYTANIA_SCARECROW(
 	    "Place a Scarecrow in the Morytania flower patch.",
 	    AD_GROUP.MORYTANIA_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.FARMING, 23)),
+	OFFER_BONEMEAL_ECTOFUNTUS(
+	    "Offer some Bonemeal at the Ectofuntus.",
+	    AD_GROUP.MORYTANIA_EASY),
 	KILL_WEREWOLF_WOLFBANE(
 	    "Kill a werewolf in its human form using the Wolfbane Dagger.",
 	    AD_GROUP.MORYTANIA_EASY,
@@ -54,6 +67,9 @@ public enum AD_MORYTANIA_TASK implements AD_TASK
 	    "Obtain some Bark from a Hollow tree.",
 	    AD_GROUP.MORYTANIA_MEDIUM,
 	    new AD_SKILL_REQUIREMENT(Skill.WOODCUTTING, 45)),
+	TRAVEL_DRAGONTOOTH_ISLE(
+	    "Travel to Dragontooth Isle.",
+	    AD_GROUP.MORYTANIA_MEDIUM),
 	KILL_TERROR_DOG(
 	    "Kill a Terror Dog.",
 	    AD_GROUP.MORYTANIA_MEDIUM,
@@ -64,6 +80,9 @@ public enum AD_MORYTANIA_TASK implements AD_TASK
 	    AD_GROUP.MORYTANIA_MEDIUM,
 	    new AD_SKILL_REQUIREMENT(Skill.COOKING, 40),
 	    new AD_QUEST_REQUIREMENT(Quest.CABIN_FEVER, QuestState.FINISHED)),
+	BOARD_HOLLOWS_SWAMPY_BOAT(
+	    "Board the swampy boat at the Hollows.",
+	    AD_GROUP.MORYTANIA_MEDIUM),
 	MAKE_PORT_PHASMATYS_CANNONBALLS(
 	    "Make a batch of cannonballs at the Port Phasmatys furnace.",
 	    AD_GROUP.MORYTANIA_MEDIUM,
@@ -183,7 +202,7 @@ public enum AD_MORYTANIA_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

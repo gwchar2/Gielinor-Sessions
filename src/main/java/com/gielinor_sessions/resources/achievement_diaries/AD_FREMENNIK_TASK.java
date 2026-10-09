@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public enum AD_FREMENNIK_TASK implements AD_TASK
 	    "Change your boots at Yrsa's Shoe Store.",
 	    AD_GROUP.FREMENNIK_EASY,
 	    new AD_QUEST_REQUIREMENT(Quest.THE_FREMENNIK_TRIALS, QuestState.FINISHED)),
+	KILL_FIVE_ROCK_CRABS(
+	    "Kill 5 Rock crabs.",
+	    AD_GROUP.FREMENNIK_EASY),
 	CRAFT_TIARA_RELLEKKA(
 	    "Craft a tiara from scratch in Rellekka.",
 	    AD_GROUP.FREMENNIK_EASY,
@@ -31,11 +35,17 @@ public enum AD_FREMENNIK_TASK implements AD_TASK
 	    "Browse the Stonemasons shop.",
 	    AD_GROUP.FREMENNIK_EASY,
 	    new AD_QUEST_REQUIREMENT(Quest.THE_GIANT_DWARF, QuestState.IN_PROGRESS)),
+	COLLECT_SNAPE_GRASS(
+	    "Collect 5 Snape grass on Waterbirth Island.",
+	    AD_GROUP.FREMENNIK_EASY),
 	STEAL_KELDAGRIM_STALL(
 	    "Steal from the Keldagrim crafting or baker's stall.",
 	    AD_GROUP.FREMENNIK_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.THIEVING, 5),
 	    new AD_QUEST_REQUIREMENT(Quest.THE_GIANT_DWARF, QuestState.IN_PROGRESS)),
+	FILL_RELLEKKA_WELL_BUCKET(
+	    "Fill a bucket with water at the Rellekka well.",
+	    AD_GROUP.FREMENNIK_EASY),
 	ENTER_TROLL_STRONGHOLD(
 	    "Enter the Troll Stronghold.",
 	    AD_GROUP.FREMENNIK_EASY,
@@ -112,10 +122,10 @@ public enum AD_FREMENNIK_TASK implements AD_TASK
 	    new AD_SKILL_REQUIREMENT(Skill.THIEVING, 75),
 	    new AD_QUEST_REQUIREMENT(Quest.THE_GIANT_DWARF, QuestState.IN_PROGRESS)),
 	CRAFT_FREMENNIK_SHIELD(
-	    "Craft a Fremennik shield on Neitiznot.",
+	    "Craft a Neitiznot shield on Neitiznot.",
 	    AD_GROUP.FREMENNIK_HARD,
 	    new AD_SKILL_REQUIREMENT(Skill.WOODCUTTING, 56),
-	    new AD_QUEST_REQUIREMENT(Quest.THE_FREMENNIK_ISLES, QuestState.FINISHED)),
+	    new AD_QUEST_REQUIREMENT(Quest.THE_FREMENNIK_ISLES, QuestState.IN_PROGRESS)),
 	MINE_ADAMANTITE_JATIZSO(
 	    "Mine 5 Adamantite ores on Jatizso.",
 	    AD_GROUP.FREMENNIK_HARD,
@@ -137,6 +147,9 @@ public enum AD_FREMENNIK_TASK implements AD_TASK
 	    new AD_QUEST_REQUIREMENT(Quest.THE_GIANT_DWARF, QuestState.IN_PROGRESS)),
 
     // ELITE
+	KILL_DAGANNOTH_KINGS(
+	    "Kill each of the Dagannoth Kings.",
+	    AD_GROUP.FREMENNIK_ELITE),
 	CRAFT_56_ASTRAL_RUNES(
 	    "Craft 56 astral runes simultaneously from Essence without the use of Extracts.",
 	    AD_GROUP.FREMENNIK_ELITE,
@@ -177,7 +190,7 @@ public enum AD_FREMENNIK_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }

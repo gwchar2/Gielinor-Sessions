@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.resources.achievement_diaries;
 
 import java.util.List;
@@ -24,10 +25,22 @@ public enum AD_WESTERN_TASK implements AD_TASK
 	    "Mine some Iron Ore near Piscatoris.",
 	    AD_GROUP.WESTERN_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.MINING, 15)),
+	COMPLETE_GNOME_AGILITY(
+	    "Complete a lap of the Gnome agility course.",
+	    AD_GROUP.WESTERN_EASY),
+	SCORE_GNOMEBALL_GOAL(
+	    "Score a goal in a Gnomeball match.",
+	    AD_GROUP.WESTERN_EASY),
 	CLAIM_CHOMPY_BIRD_HAT(
 	    "Claim any Chompy bird hat from Rantz.",
 	    AD_GROUP.WESTERN_EASY,
 	    new AD_QUEST_REQUIREMENT(Quest.BIG_CHOMPY_BIRD_HUNTING, QuestState.FINISHED)),
+	TELEPORT_PEST_CONTROL(
+	    "Teleport to Pest Control using the minigame teleports.",
+	    AD_GROUP.WESTERN_EASY),
+	COLLECT_SWAMP_TOAD(
+	    "Collect a swamp toad at the Gnome Stronghold.",
+	    AD_GROUP.WESTERN_EASY),
 	TELEPORT_ESSENCE_MINE_BRIMSTAIL(
 	    "Have Brimstail teleport you to the Essence Mine.",
 	    AD_GROUP.WESTERN_EASY,
@@ -36,6 +49,9 @@ public enum AD_WESTERN_TASK implements AD_TASK
 	    "Fletch an Oak Shortbow in the Gnome Stronghold.",
 	    AD_GROUP.WESTERN_EASY,
 	    new AD_SKILL_REQUIREMENT(Skill.FLETCHING, 20)),
+	KILL_TERRORBIRD(
+	    "Kill a terrorbird in the Terrorbird enclosure.",
+	    AD_GROUP.WESTERN_EASY),
 
     // MEDIUM
 	GRAND_TREE_AGILITY_SHORTCUT(
@@ -182,6 +198,9 @@ public enum AD_WESTERN_TASK implements AD_TASK
 	    AD_GROUP.WESTERN_ELITE,
 	    new AD_SKILL_REQUIREMENT(Skill.AGILITY, 85),
 	    new AD_QUEST_REQUIREMENT(Quest.UNDERGROUND_PASS, QuestState.FINISHED)),
+	EQUIP_COMPLETE_VOID_SET(
+	    "Equip any complete void set.",
+	    AD_GROUP.WESTERN_ELITE),
 	CLAIM_1000_CHOMPY_HAT(
 	    "Claim a Chompy bird hat from Rantz after registering at least 1000 kills.",
 	    AD_GROUP.WESTERN_ELITE,
@@ -204,7 +223,7 @@ public enum AD_WESTERN_TASK implements AD_TASK
 	{
 		this.description = _description;
 		this.group = _group;
-		this.completionStatus = null; // Null on buildup, true/false after widget is open
+		this.completionStatus = null;
 		this.requirements = List.of(_requirements);
 	}
 }
