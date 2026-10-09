@@ -3,27 +3,22 @@ package com.gielinor_sessions.resources.achievement_diaries.requirements;
 import com.gielinor_sessions.player_state_domain.PlayerState;
 import lombok.Getter;
 import net.runelite.api.Quest;
+import net.runelite.api.QuestState;
 
 @Getter
 public final class AD_QUEST_REQUIREMENT implements AD_REQUIREMENT
 {
-	public enum RequiredState
-	{
-		STARTED,
-		COMPLETED
-	}
-
 	private final Quest quest;
-	private final RequiredState requiredState;
+	private final QuestState requiredState;
 
 	public AD_QUEST_REQUIREMENT(Quest quest)
 	{
-		this(quest, RequiredState.COMPLETED);
+		this(quest, QuestState.FINISHED);
 	}
 
 	public AD_QUEST_REQUIREMENT(
 	    Quest quest,
-	    RequiredState requiredState)
+	    QuestState requiredState)
 	{
 		this.quest = quest;
 		this.requiredState = requiredState;
@@ -34,11 +29,11 @@ public final class AD_QUEST_REQUIREMENT implements AD_REQUIREMENT
 	{
 		switch (requiredState)
 		{
-			case STARTED:
+			case IN_PROGRESS:
 				return playerState.getInProgressQuestSet().contains(quest)
 				    || playerState.getCompletedQuestSet().contains(quest);
 
-			case COMPLETED:
+			case FINISHED:
 				return playerState.getCompletedQuestSet().contains(quest);
 
 			default:

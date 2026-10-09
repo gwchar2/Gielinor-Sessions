@@ -1,3 +1,4 @@
+
 package com.gielinor_sessions.player_state_domain;
 
 import javax.inject.Inject;
@@ -5,11 +6,22 @@ import javax.inject.Inject;
 import com.gielinor_sessions.resources.DiaryService;
 
 import lombok.Getter;
+
 import net.runelite.api.Client;
 import net.runelite.api.Quest;
 import net.runelite.api.QuestState;
 import net.runelite.api.Skill;
 import net.runelite.api.gameval.VarPlayerID;
+
+/*
+ * TODO: Player State refresh handlers
+ *
+ * - On skill change
+ * - On quest point change
+ * - On quest status change
+ * - On combat achievement change
+ * - On achievement diary change
+ */
 
 @Getter
 public class PlayerStateService
@@ -28,19 +40,28 @@ public class PlayerStateService
 		this.diaryService = diaryService;
 	}
 
+	// --------------------------------------------------
+	// INITIALIZATION
+	// --------------------------------------------------
+
 	public void init()
 	{
+		playerState = new PlayerState();
+
 		snapshotLevels();
 		snapshotQuests();
 
-		diaryService.populateIncompleteAchievementDiaries(playerState);
-		diaryService.populateIncompleteCombatAchievements(playerState);
+		diaryService.populateIncompleteTasks(playerState);
 
-		// snapshotBossKillCounts();
+		// TODO: snapshotBossKillCounts();
 	}
 
+	// --------------------------------------------------
+	// SKILL SNAPSHOT
+	// --------------------------------------------------
+
 	/**
-	 * Stores a snapshot of current levels.
+	 * Stores a snapshot of current levels and experience.
 	 */
 	private void snapshotLevels()
 	{
@@ -62,9 +83,12 @@ public class PlayerStateService
 		    client.getLocalPlayer().getCombatLevel());
 	}
 
+	// --------------------------------------------------
+	// QUEST SNAPSHOT
+	// --------------------------------------------------
+
 	/**
-	 * Stores a snapshot of currently finished,
-	 * in-progress and not-started quests.
+	 * Stores current finished, in-progress and not-started quests.
 	 */
 	private void snapshotQuests()
 	{
@@ -97,5 +121,19 @@ public class PlayerStateService
 
 		playerState.setQuestPoints(
 		    client.getVarpValue(VarPlayerID.QP));
+	}
+
+	// --------------------------------------------------
+	// ACHIEVEMENT DIARIES
+	// --------------------------------------------------
+
+	/**
+	 * Called when the achievement diary journal is opened.
+	 *
+	 * Only tasks identified in the journal are updated.
+	 */
+	public void updateAchievementDiaries()
+	{
+		diaryService.updateAchievementDiaries(playerState);
 	}
 }
