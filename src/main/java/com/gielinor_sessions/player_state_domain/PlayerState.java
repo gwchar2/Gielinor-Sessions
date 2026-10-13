@@ -50,4 +50,19 @@ public class PlayerState
 	private Map<AD_TASK, Boolean> achievementDiaryStatus = new HashMap<>();
 
 	private Map<String, Integer> bossKillCounts;
+
+	/**
+	 * Rebuild the derived set from statuses known through saved data or widget
+	 * scans.
+	 */
+	public void rebuildIncompleteAchievementDiaries()
+	{
+		incompleteAchievementDiaries.clear();
+		achievementDiaryStatus.forEach((task, completed) -> {
+			if (Boolean.FALSE.equals(completed))
+			{
+				incompleteAchievementDiaries.add(task);
+			}
+		});
+	}
 }

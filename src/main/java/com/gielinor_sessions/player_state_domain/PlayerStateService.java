@@ -2,6 +2,7 @@
 package com.gielinor_sessions.player_state_domain;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import com.gielinor_sessions.resources.DiaryService;
 
@@ -24,6 +25,7 @@ import net.runelite.api.gameval.VarPlayerID;
  */
 
 @Slf4j
+@Singleton
 @Getter
 public class PlayerStateService
 {
@@ -41,10 +43,6 @@ public class PlayerStateService
 		this.diaryService = diaryService;
 	}
 
-	// --------------------------------------------------
-	// INITIALIZATION
-	// --------------------------------------------------
-
 	public void init()
 	{
 		playerState = new PlayerState();
@@ -56,10 +54,6 @@ public class PlayerStateService
 
 		// TODO: snapshotBossKillCounts();
 	}
-
-	// --------------------------------------------------
-	// SKILL SNAPSHOT
-	// --------------------------------------------------
 
 	/**
 	 * Stores a snapshot of current levels and experience.
@@ -83,10 +77,6 @@ public class PlayerStateService
 		playerState.setCombatLevel(
 		    client.getLocalPlayer().getCombatLevel());
 	}
-
-	// --------------------------------------------------
-	// QUEST SNAPSHOT
-	// --------------------------------------------------
 
 	/**
 	 * Stores current finished, in-progress and not-started quests.
@@ -124,18 +114,12 @@ public class PlayerStateService
 		    client.getVarpValue(VarPlayerID.QP));
 	}
 
-	// --------------------------------------------------
-	// ACHIEVEMENT DIARIES
-	// --------------------------------------------------
-
 	/**
 	 * Called when the achievement diary journal is opened.
-	 *
 	 * Only tasks identified in the journal are updated.
 	 */
 	public void updateAchievementDiaries()
 	{
 		diaryService.updateAchievementDiaries(playerState);
-
 	}
 }
