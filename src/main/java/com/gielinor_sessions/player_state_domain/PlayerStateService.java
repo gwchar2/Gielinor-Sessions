@@ -1,8 +1,6 @@
 
 package com.gielinor_sessions.player_state_domain;
 
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import com.gielinor_sessions.resources.DiaryService;
@@ -84,16 +82,6 @@ public class PlayerStateService
 
 		playerState.setCombatLevel(
 		    client.getLocalPlayer().getCombatLevel());
-
-		log.info("Skills Matched: {}", playerState.getLevels().size());
-
-		for (Map.Entry<Skill, Integer> entry : playerState.getLevels().entrySet())
-		{
-			log.info("Skill: {} | Level: {} | Exeperience: {}",
-			    entry.getKey().getName(),
-			    client.getRealSkillLevel(entry.getKey()),
-			    entry.getValue());
-		}
 	}
 
 	// --------------------------------------------------

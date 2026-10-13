@@ -76,7 +76,6 @@ public final class DiaryService
 	{
 		if (client.getLocalPlayer() == null || client.getLocalPlayer().getName() == null)
 		{
-			log.warn("[DIARY] Cannot load: player identity is not available");
 			return;
 		}
 
@@ -94,9 +93,6 @@ public final class DiaryService
 				playerState.getIncompleteAchievementDiaries().add(entry.getKey());
 			}
 		}
-
-		log.info("[DIARY] Restored {} known statuses; {} confirmed incomplete",
-		    saved.size(), playerState.getIncompleteAchievementDiaries().size());
 	}
 
 	public void populateIncompleteCombatAchievements(PlayerState playerState)
@@ -263,7 +259,6 @@ public final class DiaryService
 
 		if (observed.isEmpty())
 		{
-			log.warn("[DIARY] No matching tasks found for journal {}", titleText);
 			return;
 		}
 
@@ -283,14 +278,8 @@ public final class DiaryService
 			}
 		}
 
-		long completed = observed.values().stream()
-		    .filter(Boolean.TRUE::equals).count();
-		log.info("[DIARY] Journal {}: matched {}, completed {}, incomplete {}",
-		    titleText, observed.size(), completed, observed.size() - completed);
-
 		if (client.getLocalPlayer() == null || client.getLocalPlayer().getName() == null)
 		{
-			log.warn("[DIARY] Scan applied in memory but not saved: player unavailable");
 			return;
 		}
 

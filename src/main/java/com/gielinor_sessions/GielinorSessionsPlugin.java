@@ -6,7 +6,6 @@ import javax.inject.Inject;
 
 import lombok.extern.slf4j.Slf4j;
 
-import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
 
@@ -70,12 +69,6 @@ public class GielinorSessionsPlugin extends Plugin
 	{
 		if (event.getGameState() == GameState.LOGGED_IN)
 		{
-			client.addChatMessage(
-			    ChatMessageType.GAMEMESSAGE,
-			    "",
-			    "Gielinor Sessions says " + config.greeting(),
-			    null);
-
 			initializePlayerState = true;
 			playerStateInitialized = false;
 		}

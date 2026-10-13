@@ -69,14 +69,6 @@ public class AD_REPO
 					result.put(task, value.getAsBoolean());
 				}
 			}
-
-			long completed = result.values().stream()
-			    .filter(Boolean.TRUE::equals)
-			    .count();
-
-			log.info("[DIARY LOAD] Account: {}, File: {}, Known: {}, Completed: {}, Incomplete: {}",
-			    accountName, file.toAbsolutePath(), result.size(), completed,
-			    result.size() - completed);
 		}
 		catch (IOException | RuntimeException e)
 		{
