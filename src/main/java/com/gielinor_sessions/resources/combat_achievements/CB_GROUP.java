@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.runelite.api.gameval.VarbitID;
 
-@RequiredArgsConstructor
 @Getter
+@RequiredArgsConstructor
 public enum CB_GROUP
 {
 	GROUP_EASY(

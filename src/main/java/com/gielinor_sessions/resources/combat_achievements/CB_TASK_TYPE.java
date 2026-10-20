@@ -3,8 +3,8 @@ package com.gielinor_sessions.resources.combat_achievements;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
 @Getter
+@AllArgsConstructor
 public enum CB_TASK_TYPE
 {
 

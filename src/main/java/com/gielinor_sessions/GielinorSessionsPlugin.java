@@ -26,8 +26,6 @@ public class GielinorSessionsPlugin extends Plugin
 	@Inject
 	private ClientThread clientThread;
 	@Inject
-	private GielinorSessionsConfig config;
-	@Inject
 	private PlayerStateService playerService;
 	@Inject
 	private JsonFileRepository jsonFileRepository;
