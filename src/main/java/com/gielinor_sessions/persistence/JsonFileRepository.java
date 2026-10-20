@@ -1,38 +1,29 @@
 package com.gielinor_sessions.persistence;
 
-import com.gielinor_sessions.player_state_domain.PlayerState;
 import com.gielinor_sessions.resources.achievement_diaries.*;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.AtomicMoveNotSupportedException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.HashMap;
 import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
+import net.runelite.client.util.Filepath;
 
-/** Persists selected PlayerState fields; no game-client or widget access. */
 @Slf4j
 @Singleton
 public final class JsonFileRepository
 {
 	private static final int SCHEMA_VERSION = 1;
 	private static final String DIARIES_KEY = "achievementDiaries";
-	private static final Path DATA_DIRECTORY = Paths.get(
-	    System.getProperty("user.home"), ".runelite", "geilinor-sessions");
-
 	private static final Map<String, AD_TASK> TASK_BY_KEY = buildTaskKeys();
 	private final Gson gson;
+	private Filepath directory;
 
 	@Inject
 	public JsonFileRepository(Gson gson)
@@ -40,154 +31,119 @@ public final class JsonFileRepository
 		this.gson = gson.newBuilder().setPrettyPrinting().create();
 	}
 
-	/** Returns false on corrupted, unsupported, or inaccessible existing files. */
-	public boolean load(String accountName, PlayerState state)
+	public void setDirectory(Filepath directory)
 	{
-		Path file = getAccountFile(accountName);
-		if (!Files.exists(file))
-		{
-			log.info("[PLAYER LOAD] No saved data for {}", accountName);
-			return true;
-		}
-
-		try
-		{
-			JsonObject root = readExistingFile(file, accountName);
-			JsonObject diaryData = root.getAsJsonObject(DIARIES_KEY);
-			if (diaryData == null)
-			{
-				throw new IllegalStateException("Missing achievementDiaries section");
-			}
-
-			Map<AD_TASK, Boolean> restored = new HashMap<>();
-			for (Map.Entry<String, JsonElement> entry : diaryData.entrySet())
-			{
-				AD_TASK task = TASK_BY_KEY.get(entry.getKey());
-				JsonElement value = entry.getValue();
-				if (task != null && value.isJsonPrimitive()
-				    && value.getAsJsonPrimitive().isBoolean())
-				{
-					restored.put(task, value.getAsBoolean());
-				}
-			}
-
-			state.getAchievementDiaryStatus().clear();
-			state.getAchievementDiaryStatus().putAll(restored);
-			state.rebuildIncompleteAchievementDiaries();
-			log.info("[PLAYER LOAD] Account={}, diary statuses={}", accountName, restored.size());
-			return true;
-		}
-		catch (IOException | RuntimeException e)
-		{
-			log.error("[PLAYER LOAD] Failed for {}. Saving is disabled for this session.", accountName, e);
-			return false;
-		}
+		this.directory = directory;
 	}
 
-	/**
-	 * One snapshot at logout/shutdown; preserves other JSON sections and unknown
-	 * keys.
-	 */
-	public boolean save(String accountName, PlayerState state)
+	public DiarySnapshot load(String accountName) throws IOException
 	{
-		Path file = getAccountFile(accountName);
-		Path temporaryFile = null;
+		Filepath file = accountFile(accountName);
+		if (!file.exists())
+		{
+			return new DiarySnapshot(new HashMap<>());
+		}
+		JsonObject root = readExistingFile(file, accountName);
+		JsonObject diaryData = root.getAsJsonObject(DIARIES_KEY);
+		if (diaryData == null)
+		{
+			throw new IOException("Missing achievementDiaries section");
+		}
+		Map<AD_TASK, Boolean> restored = new HashMap<>();
+		for (Map.Entry<String, JsonElement> entry : diaryData.entrySet())
+		{
+			AD_TASK task = TASK_BY_KEY.get(entry.getKey());
+			JsonElement value = entry.getValue();
+			if (task != null && value.isJsonPrimitive() && value.getAsJsonPrimitive().isBoolean())
+			{
+				restored.put(task, value.getAsBoolean());
+			}
+		}
+		log.debug("[PLAYER LOAD] Account={}, statuses={}", accountName, restored.size());
+		return new DiarySnapshot(restored);
+	}
+
+	public void save(String accountName, DiarySnapshot snapshot) throws IOException
+	{
+		directory.createDirectories();
+		Filepath file = accountFile(accountName);
+		JsonObject root = file.exists() ? readExistingFile(file, accountName) : new JsonObject();
+		JsonObject diaries = root.getAsJsonObject(DIARIES_KEY);
+		if (diaries == null)
+		{
+			if (file.exists())
+			{
+				throw new IOException("Missing achievementDiaries section");
+			}
+			diaries = new JsonObject();
+		}
+		for (Map.Entry<AD_TASK, Boolean> entry : snapshot.getStatuses().entrySet())
+		{
+			if (entry.getKey() != null && entry.getValue() != null)
+			{
+				diaries.addProperty(taskKey(entry.getKey()), entry.getValue());
+			}
+		}
+		root.add(DIARIES_KEY, diaries);
+		root.addProperty("schemaVersion", SCHEMA_VERSION);
+		root.addProperty("accountName", accountName);
+
+		Filepath temp = directory.createTempFile("player-", ".tmp");
 		try
 		{
-			Files.createDirectories(DATA_DIRECTORY);
-			JsonObject root = Files.exists(file)
-			    ? readExistingFile(file, accountName)
-			    : new JsonObject();
-			JsonObject diaries = root.getAsJsonObject(DIARIES_KEY);
-			if (diaries == null)
-			{
-				if (Files.exists(file))
-				{
-					throw new IllegalStateException("Missing achievementDiaries section");
-				}
-				diaries = new JsonObject();
-				root.add(DIARIES_KEY, diaries);
-			}
-
-			for (Map.Entry<AD_TASK, Boolean> entry : state.getAchievementDiaryStatus().entrySet())
-			{
-				if (entry.getKey() != null && entry.getValue() != null)
-				{
-					diaries.addProperty(getTaskKey(entry.getKey()), entry.getValue());
-				}
-			}
-			root.addProperty("schemaVersion", SCHEMA_VERSION);
-			root.addProperty("accountName", accountName);
-
-			temporaryFile = Files.createTempFile(DATA_DIRECTORY, "player-", ".tmp");
-			try (Writer writer = Files.newBufferedWriter(temporaryFile, StandardCharsets.UTF_8))
-			{
-				gson.toJson(root, writer);
-			}
+			FilepathAccess.writeContents(temp, gson.toJson(root));
 			try
 			{
-				Files.move(temporaryFile, file,
-				    StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+				temp.moveTo(file, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
 			}
 			catch (AtomicMoveNotSupportedException e)
 			{
-				Files.move(temporaryFile, file, StandardCopyOption.REPLACE_EXISTING);
+				temp.moveTo(file, StandardCopyOption.REPLACE_EXISTING);
 			}
-			log.info("[PLAYER SAVE] Account={}, diary statuses={}, file={}",
-			    accountName, diaries.size(), file.toAbsolutePath());
-			return true;
-		}
-		catch (IOException | RuntimeException e)
-		{
-			log.error("[PLAYER SAVE] Failed for {}", accountName, e);
-			return false;
+			log.debug("[PLAYER SAVE] Account={}, statuses={}", accountName, diaries.size());
 		}
 		finally
 		{
-			if (temporaryFile != null)
-			{
-				try
-				{
-					Files.deleteIfExists(temporaryFile);
-				}
-				catch (IOException e)
-				{
-					log.warn("Failed to remove temporary file {}", temporaryFile, e);
-				}
-			}
+			temp.deleteIfExists();
 		}
 	}
 
-	private JsonObject readExistingFile(Path file, String accountName) throws IOException
+	private JsonObject readExistingFile(Filepath file, String accountName) throws IOException
 	{
-		try (Reader reader = Files.newBufferedReader(file, StandardCharsets.UTF_8))
+		try
 		{
-			JsonObject root = new JsonParser().parse(reader).getAsJsonObject();
-			if (!root.has("schemaVersion")
-			    || root.get("schemaVersion").getAsInt() != SCHEMA_VERSION)
+			JsonObject root = new JsonParser().parse(FilepathAccess.readContents(file)).getAsJsonObject();
+			if (!root.has("schemaVersion") || root.get("schemaVersion").getAsInt() != SCHEMA_VERSION)
 			{
-				throw new IllegalStateException("Unsupported player data schema version");
+				throw new IOException("Unsupported player data schema version");
 			}
-			if (!root.has("accountName")
-			    || !accountName.equals(root.get("accountName").getAsString()))
+			if (!root.has("accountName") || !accountName.equals(root.get("accountName").getAsString()))
 			{
-				throw new IllegalStateException("Player data belongs to another account");
+				throw new IOException("Player data belongs to another account");
 			}
 			return root;
 		}
+		catch (RuntimeException e)
+		{
+			throw new IOException("Invalid player data JSON", e);
+		}
 	}
 
-	private Path getAccountFile(String accountName)
+	private Filepath accountFile(String accountName)
 	{
+		if (directory == null)
+		{
+			throw new IllegalStateException("Repository directory is not initialized");
+		}
 		if (accountName == null || accountName.trim().isEmpty())
 		{
-			throw new IllegalArgumentException("Account name is unavailable");
+			throw new IllegalArgumentException("Missing account name");
 		}
 		String safeName = accountName.trim().replaceAll("[^a-zA-Z0-9 _-]", "_");
-		return DATA_DIRECTORY.resolve(safeName + "_data.json");
+		return directory.joinSegment(safeName + "_data.json");
 	}
 
-	private static String getTaskKey(AD_TASK task)
+	private static String taskKey(AD_TASK task)
 	{
 		Enum<?> constant = (Enum<?>) task;
 		return constant.getDeclaringClass().getSimpleName() + "." + constant.name();
@@ -206,7 +162,7 @@ public final class JsonFileRepository
 		{
 			for (AD_TASK task : catalogue)
 			{
-				result.put(getTaskKey(task), task);
+				result.put(taskKey(task), task);
 			}
 		}
 		return result;

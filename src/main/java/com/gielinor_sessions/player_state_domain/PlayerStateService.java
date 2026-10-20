@@ -2,7 +2,9 @@ package com.gielinor_sessions.player_state_domain;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
 import com.gielinor_sessions.resources.DiaryService;
+
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
