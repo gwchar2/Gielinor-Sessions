@@ -1,14 +1,18 @@
+
 package com.gielinor_sessions.resources.combat_achievements;
 
-interface CB_TASK
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@Getter
+@RequiredArgsConstructor
+public final class CB_TASK
 {
-	String getName();
-
-	String getDescription();
-
-	CB_GROUP getGroup();
-
-	CB_TASK_TYPE getType();
-
-	int getCompletionVarbit();
+	private final int id;
+	private final String name;
+	private final String description;
+	private final CB_GROUP group;
+	private final CB_TASK_TYPE type;
+	private final int bossId;
+	private final String bossName;
 }

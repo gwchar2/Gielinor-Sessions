@@ -10,6 +10,7 @@ import net.runelite.api.Client;
 import net.runelite.api.GameState;
 import net.runelite.api.events.GameStateChanged;
 import net.runelite.api.events.GameTick;
+import net.runelite.api.events.VarbitChanged;
 import net.runelite.api.events.WidgetLoaded;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
@@ -57,7 +58,6 @@ public class GielinorSessionsPlugin extends Plugin
 	{
 		if (event.getGameState() == GameState.LOGGED_IN)
 		{
-			// Check account identity on the next tick. A world hop must not reset state.
 			initializePlayerState = true;
 		}
 		else if (event.getGameState() == GameState.LOGIN_SCREEN)
@@ -75,7 +75,6 @@ public class GielinorSessionsPlugin extends Plugin
 		{
 			return;
 		}
-
 		String accountName = client.getLocalPlayer().getName();
 		if (playerStateInitialized)
 		{
@@ -87,11 +86,38 @@ public class GielinorSessionsPlugin extends Plugin
 			saveActivePlayer();
 			clearActivePlayer();
 		}
-		playerService.init();
-		activeAccountName = accountName;
-		persistenceReady = jsonFileRepository.load(accountName, playerService.getPlayerState());
-		playerStateInitialized = true;
-		initializePlayerState = false;
+		try
+		{
+			playerService.init();
+			activeAccountName = accountName;
+			persistenceReady = jsonFileRepository.load(accountName, playerService.getPlayerState());
+			// Refresh after loading JSON so it cannot overwrite live CA data.
+			// JsonFileRepository must exclude incompleteCombatAchievements from load/save.
+			playerService.refreshCombatAchievements();
+			playerStateInitialized = true;
+			initializePlayerState = false;
+		}
+		catch (RuntimeException e)
+		{
+			log.error("Failed initializing player state", e);
+			// Keep initialization pending; retry on a later login transition/manual
+			// restart.
+			initializePlayerState = false;
+		}
+	}
+
+	@Subscribe
+	public void onVarbitChanged(VarbitChanged event)
+	{
+		if (!playerStateInitialized || client.getGameState() != GameState.LOGGED_IN)
+		{
+			return;
+		}
+		int varpId = event.getVarpId();
+		if (playerService.isCombatCompletionVarp(varpId))
+		{
+			playerService.updateCombatAchievements(varpId);
+		}
 	}
 
 	@Subscribe
