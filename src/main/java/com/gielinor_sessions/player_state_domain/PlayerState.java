@@ -1,12 +1,14 @@
 package com.gielinor_sessions.player_state_domain;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
-import net.runelite.api.Skill;
-import net.runelite.api.Quest;
 import net.runelite.api.Client;
-
+import net.runelite.api.Quest;
+import net.runelite.api.Skill;
 import com.gielinor_sessions.resources.achievement_diaries.AD_TASK;
 import com.gielinor_sessions.resources.combat_achievements.CB_TASK;
 
@@ -14,25 +16,28 @@ import com.gielinor_sessions.resources.combat_achievements.CB_TASK;
 @Setter
 public class PlayerState
 {
-	// TODO: IN THE FUTURE, SPLIT CLASS TO 'STATE' PER FEATURE
-
-	// TODO: (1) Implement achievement diaries -> LumbridgeDiaryRequirement extends
-	// GenericDiaryRequirement and use the add() and setGroup()
-	// TODO: (2) Redesign combat achievements to maybe match achievement diary?
-
 	private Client client;
 	private int combatLevel;
-	private Map<Skill, Integer> levels = new HashMap<Skill, Integer>();
-	private Map<Skill, Integer> experience = new HashMap<Skill, Integer>();
-
+	private Map<Skill, Integer> levels = new HashMap<>();
+	private Map<Skill, Integer> experience = new HashMap<>();
 	private int questPoints;
-	private Set<Quest> completedQuestSet = new HashSet<Quest>();
-	private Set<Quest> notStartedQuestSet = new HashSet<Quest>();
-	private Set<Quest> inProgressQuestSet = new HashSet<Quest>();
+	private Set<Quest> completedQuestSet = new HashSet<>();
+	private Set<Quest> notStartedQuestSet = new HashSet<>();
+	private Set<Quest> inProgressQuestSet = new HashSet<>();
 
-	Set<CB_TASK> incompleteCombatAchievements = new HashSet<CB_TASK>();
-	Set<AD_TASK> incompleteAchievementDiaries = new HashSet<AD_TASK>();
-
+	private transient Set<CB_TASK> incompleteCombatAchievements = new HashSet<>();
+	private Set<AD_TASK> incompleteAchievementDiaries = new HashSet<>();
+	private Map<AD_TASK, Boolean> achievementDiaryStatus = new HashMap<>();
 	private Map<String, Integer> bossKillCounts;
 
+	public void rebuildIncompleteAchievementDiaries()
+	{
+		incompleteAchievementDiaries.clear();
+		achievementDiaryStatus.forEach((task, completed) -> {
+			if (Boolean.FALSE.equals(completed))
+			{
+				incompleteAchievementDiaries.add(task);
+			}
+		});
+	}
 }
