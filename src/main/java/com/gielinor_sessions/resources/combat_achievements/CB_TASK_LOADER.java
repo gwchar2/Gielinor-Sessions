@@ -11,7 +11,6 @@ import net.runelite.api.Client;
 import net.runelite.api.EnumComposition;
 import net.runelite.api.StructComposition;
 
-/** Call on the RuneLite client thread after the player is logged in. */
 @Singleton
 public final class CB_TASK_LOADER
 {

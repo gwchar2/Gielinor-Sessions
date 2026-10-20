@@ -13,9 +13,6 @@ import javax.inject.Singleton;
 import net.runelite.api.widgets.Widget;
 import net.runelite.client.util.Text;
 
-/**
- * Parses diary journal widgets; has no persistence or PlayerState dependency.
- */
 @Singleton
 public final class AchievementDiaryParser
 {
@@ -97,7 +94,6 @@ public final class AchievementDiaryParser
 
 			if (currentGroup == null || text.startsWith("("))
 			{
-				// Requirement-only lines must never change completion status.
 				continue;
 			}
 
@@ -110,8 +106,6 @@ public final class AchievementDiaryParser
 				continue;
 			}
 
-			// A task description may span multiple widget lines.
-			// Its completion comes from its FIRST line, not an OR of all lines.
 			if (pendingDescription.length() == 0)
 			{
 				pendingCompleted = line.completed;
@@ -147,7 +141,6 @@ public final class AchievementDiaryParser
 		return observed;
 	}
 
-	// WIDGET TEXT EXTRACTION
 	private void collectWidgetLines(Widget widget, List<DiaryLine> lines)
 	{
 		if (widget == null || widget.isHidden())
@@ -161,8 +154,6 @@ public final class AchievementDiaryParser
 			boolean struck = false;
 			for (String part : raw.split("(?i)<br\\s*/?>"))
 			{
-				// Inspect the formatting at the FIRST visible character.
-				// A <str> inside the requirements does not complete the task.
 				Boolean descriptionStruck = null;
 				int position = 0;
 				while (position < part.length())
@@ -220,7 +211,6 @@ public final class AchievementDiaryParser
 		}
 	}
 
-	// TASK MATCHING
 	private AD_TASK findTask(AD_GROUP group, String description)
 	{
 		Map<String, AD_TASK> tasks = TASK_LOOKUP.get(group);
@@ -246,7 +236,6 @@ public final class AchievementDiaryParser
 		return false;
 	}
 
-	// REGION RESOLUTION
 	private static String resolveDiaryRegion(String title)
 	{
 		switch (title)
@@ -280,7 +269,6 @@ public final class AchievementDiaryParser
 		}
 	}
 
-	// TIER RESOLUTION
 	private static AD_GROUP resolveDiaryGroup(String region, String header)
 	{
 		String tier;
@@ -315,7 +303,6 @@ public final class AchievementDiaryParser
 		}
 	}
 
-	// NORMALIZATION
 	private static String normalize(String text)
 	{
 		if (text == null)
