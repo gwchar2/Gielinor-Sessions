@@ -46,9 +46,10 @@ public class GielinorSessionsPlugin extends Plugin
 	@Override
 	protected void startUp() throws IOException
 	{
-		initializePlayerState = false;
+		initializePlayerState = client.getGameState() == GameState.LOGGED_IN;
 		playerStateInitialized = false;
 		persistenceReady = false;
+		activeAccountName = null;
 		persistence.start(getPluginDirectory());
 		log.debug("Gielinor Sessions started");
 	}

@@ -16,7 +16,7 @@ public enum AD_ARDOUGNE_TASK implements AD_TASK
 	ESS_MINE(
 	    "Have Wizard Cromperty teleport you to the Rune Essence mine.",
 	    AD_GROUP.ARDOUGNE_EASY,
-	    new AD_QUEST_REQUIREMENT(Quest.RUNE_MYSTERIES, QuestState.IN_PROGRESS)),
+	    new AD_QUEST_REQUIREMENT(Quest.RUNE_MYSTERIES, QuestState.FINISHED)),
 	STEAL_CAKE(
 	    "Steal a cake from the Ardougne market stalls.",
 	    AD_GROUP.ARDOUGNE_EASY,
